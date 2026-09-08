@@ -1,0 +1,28 @@
+﻿  ConsoleApplication1.cpp
+  Matrix.cpp
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(28,38): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(31,56): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(34,56): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(39,38): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(42,39): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(45,39): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(132,17): warning C4566: символ, представленный универсальным именем символа "\u2713", невозможно представить в текущей кодовой странице (1251)
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(135,17): warning C4566: символ, представленный универсальным именем символа "\u2713", невозможно представить в текущей кодовой странице (1251)
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(138,17): warning C4566: символ, представленный универсальным именем символа "\u2717", невозможно представить в текущей кодовой странице (1251)
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(216,17): warning C4566: символ, представленный универсальным именем символа "\u2713", невозможно представить в текущей кодовой странице (1251)
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(219,17): warning C4566: символ, представленный универсальным именем символа "\u2717", невозможно представить в текущей кодовой странице (1251)
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(384,46): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(389,64): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(392,64): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(395,59): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(463,46): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(466,47): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(469,47): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+I:\чм\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(472,42): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+  PreciseDouble.h
+  SpecialMatrix.cpp
+  Vector.cpp
+I:\чм\ConsoleApplication1\ConsoleApplication1\Vector.cpp(27,26): warning C4244: аргумент: преобразование "double" в "const float", возможна потеря данных
+  Создание кода...
+  LINK : не найден или не выполнена сборка I:\чм\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe при последней инкрементной компоновке; выполняется полная компоновка
+  ConsoleApplication1.vcxproj -> I:\чм\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe

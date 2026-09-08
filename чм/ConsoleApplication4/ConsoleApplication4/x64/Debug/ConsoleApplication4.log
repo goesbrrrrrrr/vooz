@@ -1,0 +1,17 @@
+﻿  ConsoleApplication4.cpp
+E:\ConsoleApplication4\ConsoleApplication4\lab2.h(959,18): warning C4566: character represented by universal-character-name '\u00D7' cannot be represented in the current code page (1251)
+  (compiling source file 'ConsoleApplication4.cpp')
+  
+E:\ConsoleApplication4\ConsoleApplication4\lab2.h(994,18): warning C4566: character represented by universal-character-name '\u00D7' cannot be represented in the current code page (1251)
+  (compiling source file 'ConsoleApplication4.cpp')
+  
+E:\ConsoleApplication4\ConsoleApplication4\lab2.h(1019,18): warning C4566: character represented by universal-character-name '\u00D7' cannot be represented in the current code page (1251)
+  (compiling source file 'ConsoleApplication4.cpp')
+  
+E:\ConsoleApplication4\ConsoleApplication4\lab2.h(1044,18): warning C4566: character represented by universal-character-name '\u00D7' cannot be represented in the current code page (1251)
+  (compiling source file 'ConsoleApplication4.cpp')
+  
+E:\ConsoleApplication4\ConsoleApplication4\lab3.h(74,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'ConsoleApplication4.cpp')
+  
+  ConsoleApplication4.vcxproj -> E:\ConsoleApplication4\x64\Debug\ConsoleApplication4.exe

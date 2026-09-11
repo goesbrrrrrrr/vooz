@@ -27,6 +27,14 @@ JOBS = [
     ("5", os.path.join(ROOT, "5"), "!чм 5 Юрканов", "make_lab5.py"),
 ]
 
+# Без аргументов собираются обе работы; номера работ в командной строке
+# ограничивают сборку ими, чтобы не переписывать файлы той работы, которая
+# не менялась: python build_reports.py 4
+if sys.argv[1:]:
+    JOBS = [j for j in JOBS if j[0] in sys.argv[1:]]
+    if not JOBS:
+        raise SystemExit("нет таких работ: " + " ".join(sys.argv[1:]))
+
 
 def unlock(path):
     if os.path.exists(path):

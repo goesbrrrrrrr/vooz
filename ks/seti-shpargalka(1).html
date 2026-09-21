@@ -1,0 +1,1502 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Шпаргалка по курсу «Компьютерные сети»: сжатые ответы на 53 экзаменационных вопроса.">
+<meta name="theme-color" content="#F4F7F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A1012" media="(prefers-color-scheme: dark)">
+<title>Шпаргалка по компьютерным сетям</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=PT+Sans:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#F4F7F7; --card:#FFFFFF; --band:#EAF0F0;
+  --line:#D3DDDE; --hair:#E4EBEB;
+  --ink:#0D1416; --ink-2:#3E4D51; --muted:#6C7C80;
+  --accent:#006E7A; --accent-2:#00525B; --accent-wash:#E2F0F0; --accent-line:#A8CFD2;
+  --flag:#8C4B12; --flag-wash:#F8EDE2;
+  --key-ink:#F4F7F7;
+  --hdr:53px;
+  --f-disp:"Bitter",Georgia,"Times New Roman",serif;
+  --f-body:"PT Sans","Segoe UI",Arial,sans-serif;
+  --f-mono:"JetBrains Mono","Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0A1012; --card:#111A1C; --band:#162124;
+    --line:#222F32; --hair:#1C282B;
+    --ink:#E1EAEA; --ink-2:#B3C3C5; --muted:#85989B;
+    --accent:#4FC4C6; --accent-2:#79D8D8; --accent-wash:#10292B; --accent-line:#2A4E50;
+    --flag:#D89A5C; --flag-wash:#2A1F14;
+    --key-ink:#07100F;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0A1012; --card:#111A1C; --band:#162124;
+  --line:#222F32; --hair:#1C282B;
+  --ink:#E1EAEA; --ink-2:#B3C3C5; --muted:#85989B;
+  --accent:#4FC4C6; --accent-2:#79D8D8; --accent-wash:#10292B; --accent-line:#2A4E50;
+  --flag:#D89A5C; --flag-wash:#2A1F14;
+  --key-ink:#07100F;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--f-body); font-size:15px; line-height:1.52;
+  -webkit-font-smoothing:antialiased; overflow-wrap:break-word;
+}
+code,.m{overflow-wrap:anywhere}
+::selection{background:var(--accent-wash); color:var(--ink)}
+a{color:var(--accent); text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:2px}
+
+.top{
+  position:sticky; top:0; z-index:20;
+  background:var(--card); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  padding:10px 22px;
+}
+.brand{display:flex; align-items:baseline; gap:10px; margin-right:auto}
+.brand h1{font-family:var(--f-disp); font-weight:700; font-size:17px; margin:0; letter-spacing:-.01em}
+.brand .sub{font-size:11px; color:var(--muted); letter-spacing:.09em; text-transform:uppercase}
+.search{position:relative; display:flex; align-items:center}
+.search input{
+  font-family:var(--f-body); font-size:14px; color:var(--ink);
+  background:var(--paper); border:1px solid var(--line); border-radius:3px;
+  padding:6px 10px 6px 30px; width:270px;
+}
+.search input::placeholder{color:var(--muted)}
+.search svg{position:absolute; left:9px; width:14px; height:14px; stroke:var(--muted); fill:none; stroke-width:1.8}
+.count{font-family:var(--f-mono); font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap}
+
+.wrap{display:grid; grid-template-columns:236px minmax(0,1fr); align-items:start}
+.rail{
+  position:sticky; top:var(--hdr); align-self:start;
+  max-height:calc(100vh - var(--hdr)); overflow-y:auto;
+  padding:22px 14px 40px 22px; border-right:1px solid var(--hair);
+}
+.rail .rl{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:0 0 10px 0}
+.rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.rail a{
+  display:grid; grid-template-columns:1fr auto; gap:8px; align-items:baseline;
+  padding:5px 8px; border-radius:3px; text-decoration:none; color:var(--ink-2);
+  font-size:13px; line-height:1.3;
+}
+.rail a:hover{background:var(--accent-wash); color:var(--accent)}
+.rail a .rn{font-family:var(--f-mono); font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums}
+.rail a:hover .rn{color:var(--accent)}
+main{padding:0 26px 90px 26px; min-width:0}
+
+/* указатель билетов */
+.index{margin:22px 0 4px 0}
+.index .il{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:0 0 8px 0}
+.index .grid{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(38px,1fr));
+  gap:4px; max-width:760px;
+}
+.index a{
+  display:flex; align-items:center; justify-content:center;
+  min-height:34px; text-decoration:none; border:1px solid var(--line);
+  background:var(--card); border-radius:3px;
+  font-family:var(--f-mono); font-size:13px; color:var(--ink-2);
+  font-variant-numeric:tabular-nums;
+}
+.index a:hover{background:var(--accent); border-color:var(--accent); color:var(--key-ink)}
+.index a.on{border-color:var(--accent); color:var(--accent); background:var(--accent-wash)}
+.index a.off{opacity:.3}
+
+.sec{
+  display:flex; align-items:baseline; gap:12px;
+  margin:34px 0 0 0; padding:9px 14px; scroll-margin-top:calc(var(--hdr) + 8px);
+  background:var(--band); border-left:3px solid var(--accent);
+}
+.sec:first-of-type{margin-top:22px}
+.sec h2{font-family:var(--f-disp); font-weight:600; font-size:16px; margin:0; letter-spacing:-.005em}
+.sec .range{font-family:var(--f-mono); font-size:11px; color:var(--accent); font-variant-numeric:tabular-nums; margin-left:auto; white-space:nowrap}
+
+.q{
+  display:grid; grid-template-columns:46px minmax(0,1fr); gap:0 14px;
+  padding:16px 14px 16px 0; border-bottom:1px solid var(--hair); scroll-margin-top:calc(var(--hdr) + 8px);
+}
+.q-num{
+  font-family:var(--f-mono); font-size:13px; font-weight:500;
+  color:var(--accent); font-variant-numeric:tabular-nums;
+  text-align:right; padding-top:2px; letter-spacing:-.02em;
+}
+.q:target{background:var(--accent-wash); box-shadow:-10px 0 0 var(--accent-wash),10px 0 0 var(--accent-wash)}
+.q:target .q-num{color:var(--accent)}
+.q h3{font-family:var(--f-disp); font-weight:600; font-size:15.5px; line-height:1.3; margin:0 0 7px 0; text-wrap:balance}
+mark{background:var(--accent-wash); color:var(--ink); box-shadow:inset 0 -1px 0 var(--accent-line); border-radius:1px; padding:0 1px}
+.lvl{
+  display:inline-block; vertical-align:2px; margin-left:8px;
+  font-family:var(--f-mono); font-size:10px; font-weight:500; letter-spacing:.04em;
+  color:var(--accent); background:var(--accent-wash);
+  border:1px solid var(--accent-line); border-radius:2px; padding:1px 5px;
+}
+.lead{margin:0 0 7px 0; color:var(--ink-2)}
+.lead b{color:var(--ink)}
+ul.p{margin:0; padding:0 0 0 17px; display:flex; flex-direction:column; gap:3px}
+ul.p ul{margin:3px 0 0 0; padding:0 0 0 16px; display:flex; flex-direction:column; gap:2px; color:var(--ink-2)}
+ul.p li::marker{color:var(--accent-line)}
+b.t{color:var(--ink); font-weight:700}
+code,.m{font-family:var(--f-mono); font-size:12.5px; color:var(--accent-2); font-variant-numeric:tabular-nums}
+
+.nums{
+  margin-top:9px; display:flex; flex-wrap:wrap; gap:0 18px;
+  border-left:2px solid var(--accent-line); padding:5px 0 5px 11px;
+  font-family:var(--f-mono); font-size:12px; color:var(--ink-2);
+  font-variant-numeric:tabular-nums;
+}
+.nums span{white-space:nowrap}
+.nums b{color:var(--muted); font-weight:400}
+
+.warn{
+  margin-top:9px; padding:6px 11px; background:var(--flag-wash);
+  border-left:2px solid var(--flag); font-size:13.5px; color:var(--ink-2);
+}
+.warn b{color:var(--flag); font-weight:700}
+
+.scroll{overflow-x:auto; margin-top:9px}
+table{border-collapse:collapse; font-size:13px; min-width:100%}
+th,td{text-align:left; padding:4px 14px 4px 0; border-bottom:1px solid var(--hair); white-space:nowrap}
+th{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:400}
+td.n{font-family:var(--f-mono); font-variant-numeric:tabular-nums; color:var(--ink-2)}
+
+.bits{display:grid; grid-template-columns:repeat(32,1fr); min-width:560px; gap:2px; margin-top:4px}
+.bits .f{
+  background:var(--accent-wash); border:1px solid var(--accent-line); border-radius:2px;
+  font-family:var(--f-mono); font-size:10.5px; color:var(--ink-2);
+  padding:5px 3px; text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.bits .f.d{background:transparent; border-style:dashed; color:var(--muted)}
+.bits .f.k{background:var(--accent); border-color:var(--accent); color:var(--key-ink); font-weight:500}
+.ruler{
+  display:grid; grid-template-columns:repeat(4,1fr); min-width:560px; margin-top:7px;
+  font-family:var(--f-mono); font-size:10px; color:var(--muted); letter-spacing:.04em;
+}
+.ruler span{border-left:1px solid var(--line); padding-left:4px}
+
+.frame{display:flex; min-width:600px; gap:2px; margin-top:4px}
+.frame div{
+  border:1px solid var(--accent-line); background:var(--accent-wash); border-radius:2px;
+  padding:5px 3px; text-align:center; font-family:var(--f-mono); font-size:10.5px;
+  color:var(--ink-2); line-height:1.25; overflow:hidden;
+}
+.frame div small{display:block; color:var(--muted); font-size:9.5px}
+.frame div.pre{background:transparent; border-style:dashed}
+
+footer{border-top:1px solid var(--line); margin:0 26px; padding:18px 0 40px 60px; font-size:12.5px; color:var(--muted)}
+.hidden{display:none !important}
+#empty{padding:40px 0 0 60px; color:var(--muted); font-size:14px}
+
+/* ---- планшет и телефон: боковая колонка превращается в липкую ленту разделов ---- */
+@media (max-width:900px){
+  .wrap{display:block}
+  .rail{
+    position:sticky; top:var(--hdr); z-index:15;
+    max-height:none; overflow:visible;
+    background:var(--paper); border-right:0; border-bottom:1px solid var(--line);
+    padding:7px 0 8px 0;
+  }
+  .rail .rl{display:none}
+  .rail ol{
+    flex-direction:row; gap:6px; padding:0 14px 2px 14px;
+    overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:thin;
+  }
+  .rail li{flex:0 0 auto}
+  .rail a{
+    display:flex; gap:7px; white-space:nowrap; border:1px solid var(--line);
+    background:var(--card); padding:7px 12px; border-radius:18px; font-size:13px;
+  }
+  main{padding:0 16px 70px 16px}
+  footer{margin:0 16px; padding-left:0}
+  /* под шапкой ещё и лента разделов — отступ якоря больше */
+  .q,.sec{scroll-margin-top:calc(var(--hdr) + 60px)}
+}
+/* ---- телефон ---- */
+@media (max-width:700px){
+  :root{--hdr:49px}
+  body{font-size:15.5px; line-height:1.55}
+  .top{padding:8px 14px; gap:10px; flex-wrap:nowrap}
+  .brand{margin-right:0; flex:0 0 auto}
+  .brand h1{font-size:15px}
+  .brand .sub{display:none}
+  .search{flex:1 1 auto; min-width:0}
+  .search input{width:100%; font-size:16px; padding:7px 10px 7px 30px}
+  .count{font-size:11px}
+  .index{margin-top:16px}
+  .index .grid{grid-template-columns:repeat(auto-fill,minmax(42px,1fr)); gap:5px}
+  .index a{min-height:40px; font-size:14px}
+  .sec{margin-top:26px; padding:8px 12px}
+  .sec h2{font-size:15px}
+  .q{display:block; padding:15px 0}
+  .q-num{
+    display:block; text-align:left; padding:0 0 3px 0;
+    font-size:11.5px; letter-spacing:.09em;
+  }
+  .q h3{font-size:16px; margin-bottom:8px}
+  ul.p{padding-left:19px}
+  .nums{gap:2px 16px; font-size:12px}
+  .scroll{margin-left:-16px; margin-right:-16px; padding:0 16px}
+  #empty{padding-left:0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important}}
+@media print{
+  .top,.rail{display:none}
+  body{background:#fff; color:#000; font-size:9pt; line-height:1.34}
+  .wrap{display:block}
+  main{padding:0; columns:2; column-gap:16px}
+  .q{break-inside:avoid; padding:5px 0; grid-template-columns:26px 1fr}
+  .sec{break-after:avoid; background:none; border-left:2px solid #000; margin:10px 0 0}
+  .nums,.warn,.scroll{break-inside:avoid}
+  footer{display:none}
+}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1>Компьютерные сети</h1>
+    <span class="sub">шпаргалка · 53 вопроса</span>
+  </div>
+  <label class="search">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg>
+    <input id="f" type="search" placeholder="коллизия, CIDR, DORA…" autocomplete="off" spellcheck="false" aria-label="Поиск по шпаргалке">
+  </label>
+  <span class="count" id="cnt">53&nbsp;/&nbsp;53</span>
+</header>
+
+<div class="wrap">
+<nav class="rail" aria-label="Разделы">
+  <p class="rl">Разделы</p>
+  <ol>
+    <li><a href="#s1">Сети и модель OSI<span class="rn">1–4</span></a></li>
+    <li><a href="#s2">Коммутация<span class="rn">5–9</span></a></li>
+    <li><a href="#s3">Линии связи<span class="rn">10–16</span></a></li>
+    <li><a href="#s4">Ethernet и ЛВС<span class="rn">17–24</span></a></li>
+    <li><a href="#s5">TCP/IP и адресация<span class="rn">25–30</span></a></li>
+    <li><a href="#s6">DNS и DHCP<span class="rn">31–35</span></a></li>
+    <li><a href="#s7">IP, маршрутизация<span class="rn">36–42</span></a></li>
+    <li><a href="#s8">Транспортный уровень<span class="rn">43–46</span></a></li>
+    <li><a href="#s9">Сети операторов<span class="rn">47–50</span></a></li>
+    <li><a href="#s10">Беспроводные сети<span class="rn">51–53</span></a></li>
+  </ol>
+</nav>
+
+<main>
+
+<nav class="index" id="idx" aria-label="Номера вопросов">
+  <p class="il">Вопрос по номеру</p>
+  <div class="grid"></div>
+</nav>
+
+<div class="sec" id="s1"><h2>Сети и модель OSI</h2><span class="range">01–04</span></div>
+
+<article class="q" id="q1">
+  <div class="q-num">01</div>
+  <div class="q-body">
+    <h3>Интернет как фактор развития сетевых технологий</h3>
+    <p class="lead">Интернет из исследовательской сети превратился в среду, задавшую единые стандарты и экономику всей отрасли.</p>
+    <ul class="p">
+      <li><b class="t">Хронология:</b> ARPANET (1969) → переход на TCP/IP (1983) → NSFNET → коммерциализация и WWW Тима Бернерса-Ли (1989–1991) → массовый Интернет.</li>
+      <li><b class="t">Унификация протоколов.</b> TCP/IP стал стандартом де-факто и вытеснил IPX/SPX, NetBEUI, AppleTalk, DECnet, X.25. Сети перестали быть «вещью в себе».</li>
+      <li><b class="t">Открытая модель стандартизации:</b> IETF и документы RFC — бесплатные, публичные, принимаются по принципу «грубый консенсус и работающий код», в отличие от закрытых фирменных решений.</li>
+      <li><b class="t">Массовость → удешевление.</b> Огромные тиражи оборудования снизили цену порта; сеть стала инфраструктурной услугой, а не привилегией.</li>
+      <li><b class="t">Давление трафика</b> породило технологии доступа (xDSL, DOCSIS, FTTx/PON, 3G→5G) и магистралей (SDH → DWDM, 100/400G).</li>
+      <li><b class="t">Конвергенция:</b> телефония, ТВ и данные сошлись в одну пакетную IP-сеть — VoIP, IPTV, triple play.</li>
+      <li><b class="t">Новые требования</b> к качеству (QoS для голоса и видео), к безопасности (TLS, IPsec, DNSSEC), к масштабу адресации (CIDR, NAT, IPv6).</li>
+      <li><b class="t">Новые модели:</b> облака, CDN, IoT, мобильность, SDN/виртуализация сетевых функций.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q2">
+  <div class="q-num">02</div>
+  <div class="q-body">
+    <h3>Модель OSI: физический, канальный и сетевой уровни<span class="lvl">L1–L3</span></h3>
+    <p class="lead">Модель ISO/IEC 7498 (1984) — семиуровневая эталонная модель взаимодействия открытых систем. Каждый уровень оказывает <b>сервис</b> верхнему (по вертикали, через интерфейс) и общается с одноимённым уровнем партнёра по <b>протоколу</b> (по горизонтали). При передаче вниз идёт инкапсуляция — добавление своего заголовка.</p>
+    <ul class="p">
+      <li><b class="t">L1, физический.</b> Передача потока битов через физическую среду. Определяет: типы сигналов и кодирование, уровни напряжений, скорость, разъёмы и распиновку, синхронизацию, дальность. Единица данных — <b>бит</b>. Устройства: репитер, концентратор, медиаконвертер, трансивер. Примеры: 100BASE-TX, RS-232, SDH, DSL.</li>
+      <li><b class="t">L2, канальный.</b> Передача кадров между узлами <i>одной</i> сети. Функции: кадрирование (поиск границ кадра), физическая адресация (MAC), обнаружение ошибок по CRC, управление доступом к разделяемой среде, иногда — управление потоком и повтор. Единица — <b>кадр</b>. В ЛВС делится на подуровни LLC и MAC. Устройства: сетевой адаптер, мост, коммутатор. Примеры: Ethernet, PPP, HDLC, 802.11.</li>
+      <li><b class="t">L3, сетевой.</b> Объединение разнородных сетей в составную сеть. Функции: логическая (независимая от оборудования) адресация, выбор маршрута, продвижение пакетов, фрагментация под разный MTU, диагностика. Единица — <b>пакет</b>. Устройство — маршрутизатор. Примеры: IP, ICMP, IPX, OSPF, BGP.</li>
+    </ul>
+    <div class="warn"><b>Граница L2/L3:</b> канальный уровень работает внутри сети с плоскими адресами и не умеет строить маршруты; сетевой уровень умеет, но опирается на сервис канального на каждом участке.</div>
+  </div>
+</article>
+
+<article class="q" id="q3">
+  <div class="q-num">03</div>
+  <div class="q-body">
+    <h3>Модель OSI: транспортный, сеансовый, представительный и прикладной уровни<span class="lvl">L4–L7</span></h3>
+    <ul class="p">
+      <li><b class="t">L4, транспортный.</b> Сквозная (end-to-end) доставка между <i>процессами</i>, а не узлами — промежуточные маршрутизаторы этот уровень не обрабатывают. Функции: разбиение на сегменты и сборка, мультиплексирование прикладных потоков по номерам портов, обнаружение и исправление ошибок квитированием и повторами, нумерация и упорядочение, управление потоком и перегрузкой. В OSI — 5 классов сервиса (0–4) по степени надёжности. Примеры: TCP, UDP, SCTP. Единица — <b>сегмент</b> / дейтаграмма.</li>
+      <li><b class="t">L5, сеансовый.</b> Организация диалога: установление, поддержание и корректное завершение сеанса; управление очередностью передачи (кто говорит — полудуплекс, маркер); расстановка контрольных точек (синхронизация) и восстановление сеанса с последней точки после сбоя. Примеры: RPC, NetBIOS, PPTP, механизмы сессий в SIP.</li>
+      <li><b class="t">L6, представительный.</b> Отвечает за <i>синтаксис</i> и форму данных, а не за их смысл: согласование кодировок (ASCII ↔ EBCDIC ↔ Unicode), преобразование форматов, сжатие, шифрование. Примеры: ASN.1/BER, MIME, TLS/SSL, форматы JPEG, MPEG.</li>
+      <li><b class="t">L7, прикладной.</b> Набор сетевых служб и интерфейс к ним для прикладных программ. Примеры: HTTP, FTP, SMTP/POP3/IMAP, DNS, SNMP, Telnet, SMB, NFS.</li>
+    </ul>
+    <div class="warn"><b>Важно:</b> в стеке TCP/IP уровни L5, L6 и L7 отдельно не выделяются — они объединены в один прикладной уровень, а их функции реализуют сами приложения и библиотеки.</div>
+  </div>
+</article>
+
+<article class="q" id="q4">
+  <div class="q-num">04</div>
+  <div class="q-body">
+    <h3>Виды топологий сети</h3>
+    <p class="lead">Топология — конфигурация графа связей. Различают <b>физическую</b> (как проложены кабели) и <b>логическую</b> (как реально идут сигналы): например, 10BASE-T физически звезда, логически — общая шина.</p>
+    <ul class="p">
+      <li><b class="t">Полносвязная (full mesh).</b> Каждый с каждым: <span class="m">N(N−1)/2</span> линий. Максимальная надёжность и минимальные задержки, но стоимость растёт квадратично — применяется для небольшого числа магистральных узлов.</li>
+      <li><b class="t">Ячеистая (mesh), частично связная.</b> Связи только между теми узлами, между которыми есть заметный трафик; есть резервные пути. Базовая топология глобальных сетей и ядра Интернета.</li>
+      <li><b class="t">Звезда.</b> Все узлы подключены к центральному устройству. Просто в монтаже и диагностике, но центр — единая точка отказа. Основа современных ЛВС (центр — коммутатор).</li>
+      <li><b class="t">Иерархическая звезда (дерево).</b> Каскад звёзд: рабочие места → этажные коммутаторы → коммутатор здания. Соответствует структурированной кабельной системе (СКС) и отраслевому стандарту проектирования.</li>
+      <li><b class="t">Кольцо.</b> Данные идут по кругу, каждый узел ретранслирует. Даёт детерминированный доступ (маркер) и естественное резервирование при двойном кольце (FDDI, SDH, Token Ring). Обрыв одного участка в одинарном кольце парализует сеть.</li>
+      <li><b class="t">Общая шина.</b> Один разделяемый кабель с терминаторами (10BASE5/10BASE2). Дёшево и без активного центра, но коллизии, трудный поиск обрыва, отказ кабеля роняет весь сегмент. Исторический вариант.</li>
+      <li><b class="t">Смешанные.</b> Реальные сети комбинируют: ядро — ячеистое, уровень доступа — иерархическая звезда.</li>
+    </ul>
+  </div>
+</article>
+
+<div class="sec" id="s2"><h2>Задачи коммутации</h2><span class="range">05–09</span></div>
+
+<article class="q" id="q5">
+  <div class="q-num">05</div>
+  <div class="q-body">
+    <h3>Задачи коммутации. Определение информационных потоков и маршрутизация</h3>
+    <p class="lead">Обобщённая задача коммутации — соединить любую пару узлов через сеть промежуточных узлов. Она распадается на <b>четыре частные задачи</b>: (1) определение информационных потоков, (2) маршрутизация, (3) продвижение данных, (4) мультиплексирование и демультиплексирование.</p>
+    <ul class="p">
+      <li><b class="t">Информационный поток</b> — набор данных с общим признаком, к которым узлы применяют одинаковую обработку (одинаковый маршрут, один уровень качества обслуживания).</li>
+      <li><b class="t">Признаки потока:</b> адрес отправителя и получателя, номера портов, номер входного интерфейса, метка виртуального канала (VPI/VCI, DLCI, метка MPLS), приоритет или класс DSCP. Различают <i>глобальный</i> признак (значим во всей сети — адрес назначения) и <i>локальный</i> (значим только для одного узла — номер порта, метка).</li>
+      <li><b class="t">Макро- и микропотоки:</b> поток «во все узлы сети N» укрупнённый; поток «между двумя конкретными приложениями» — микропоток. Чем крупнее поток, тем меньше записей в таблицах.</li>
+      <li><b class="t">Маршрут</b> — последовательность промежуточных узлов и каналов. Маршрутизация = <i>определение</i> маршрута + <i>оповещение</i> узлов о нём (запись в таблицы).</li>
+      <li><b class="t">Критерии выбора:</b> число промежуточных узлов (хопов), пропускная способность, задержка, загрузка, надёжность, административная стоимость. Обычно ищется путь минимальной суммарной метрики.</li>
+      <li><b class="t">Способы:</b> фиксированная (статическая, вручную) и адаптивная (динамическая, по протоколам маршрутизации); маршрутизация от источника (source routing) и пошаговая (hop-by-hop, преобладает).</li>
+      <li><b class="t">Результат</b> — таблица коммутации/маршрутизации: <span class="m">признак потока → номер выходного интерфейса</span>.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q6">
+  <div class="q-num">06</div>
+  <div class="q-body">
+    <h3>Задачи коммутации. Продвижение данных и мультиплексирование/демультиплексирование</h3>
+    <ul class="p">
+      <li><b class="t">Продвижение (forwarding)</b> — то, что узел делает с каждой единицей данных: распознать признак потока в заголовке → найти запись в таблице коммутации → передать данные на указанный выходной интерфейс.</li>
+      <li><b class="t">Разделение труда по скорости:</b> маршрутизация — «медленный», фоновый процесс (секунды–минуты, строит таблицу); продвижение — «быстрый» процесс, выполняется для каждого пакета и потому реализуется аппаратно (ASIC, сетевые процессоры), десятки миллионов пакетов в секунду.</li>
+      <li><b class="t">Мультиплексирование</b> — объединение нескольких потоков в один общий канал на выходе (несколько входов → один выход). Нужно, потому что число портов и каналов всегда меньше числа потоков.</li>
+      <li><b class="t">Способы разделения общего ресурса:</b>
+        <ul>
+          <li>частотное FDM/WDM — каждому потоку своя полоса частот или длина волны;</li>
+          <li>временное TDM — каждому потоку периодический тайм-слот (детерминированное разделение);</li>
+          <li>кодовое CDM — разделение по ортогональным кодам;</li>
+          <li>пакетное (статистическое) — слот получает тот, у кого есть данные; ресурс не простаивает, но и не гарантирован.</li>
+        </ul>
+      </li>
+      <li><b class="t">Демультиплексирование</b> — обратная операция: разбор общего потока на составляющие по признаку и выдача каждой своему получателю или интерфейсу.</li>
+      <li><b class="t">Итог:</b> коммутатор = набор портов + таблица коммутации + механизм продвижения + мультиплексор/демультиплексор.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q7">
+  <div class="q-num">07</div>
+  <div class="q-body">
+    <h3>Коммутация каналов</h3>
+    <p class="lead">Перед передачей данных в сети создаётся <b>непрерывный составной физический канал</b> из последовательно соединённых участков, и его ресурс жёстко резервируется за парой абонентов на всё время сеанса.</p>
+    <ul class="p">
+      <li><b class="t">Три фазы:</b> установление соединения (сигнальный запрос проходит сеть и «защёлкивает» коммутаторы) → передача данных → разрыв соединения и освобождение ресурсов.</li>
+      <li><b class="t">Разделение канала:</b> FDM — аналоговая телефония, полоса 4 кГц на разговор; TDM — цифровая иерархия, поток E1 = 32 канальных интервала × 64 кбит/с = 2,048 Мбит/с; WDM/DWDM — оптика.</li>
+      <li><b class="t">Достоинства:</b> постоянная и гарантированная скорость; малая и, главное, <i>постоянная</i> задержка (нет буферизации и очередей) → идеально для голоса и видео в реальном времени; простая и дешёвая логика узла.</li>
+      <li><b class="t">Недостатки:</b> отказ в обслуживании при занятости («короткие гудки») вместо замедления; неэффективность на пульсирующем компьютерном трафике — во время пауз зарезервированная полоса простаивает и никому не отдаётся; нельзя превысить выделенную скорость, даже если сеть свободна; обязательная задержка на установление соединения.</li>
+      <li><b class="t">Примеры:</b> ТфОП, ISDN, голосовой тракт GSM, SDH/SONET, оптические кросс-коннекты (OXC).</li>
+    </ul>
+    <div class="nums"><span><b>E1 =</b> 2,048 Мбит/с</span><span><b>канал ТЧ:</b> 64 кбит/с</span><span><b>полоса разговора:</b> 0,3–3,4 кГц</span></div>
+  </div>
+</article>
+
+<article class="q" id="q8">
+  <div class="q-num">08</div>
+  <div class="q-body">
+    <h3>Коммутация пакетов. Принцип работы</h3>
+    <p class="lead">Сообщение делится на <b>пакеты</b> ограниченной длины, каждый снабжается заголовком с адресной информацией и путешествует по сети самостоятельно. Ресурс каналов делится динамически, без резервирования.</p>
+    <ul class="p">
+      <li><b class="t">Работа узла — «сохранить и передать» (store-and-forward):</b> принять пакет целиком в буфер → проверить контрольную сумму → определить по заголовку выходной порт → поставить в очередь этого порта → передать, когда канал освободится.</li>
+      <li><b class="t">Статистическое мультиплексирование:</b> канал достаётся тому, у кого сейчас есть данные. Пока один абонент молчит, полосу используют остальные — отсюда высокая эффективность на пульсирующем трафике.</li>
+      <li><b class="t">Зачем делить на пакеты, а не слать сообщение целиком:</b> меньше требуемый объём буферов; конвейеризация — пока хвост сообщения принимается первым узлом, голова уже идёт по второму участку, что резко сокращает общее время; большое сообщение не блокирует канал надолго, задержки распределяются справедливее.</li>
+      <li><b class="t">Достоинства:</b> высокий коэффициент использования каналов, устойчивость к отказам (пакеты обходят повреждённый участок), возможность работы без предварительного установления соединения, дешевизна в расчёте на бит.</li>
+      <li><b class="t">Недостатки:</b> переменная задержка и джиттер из-за очередей; потери пакетов при переполнении буферов; негарантированная пропускная способность (сеть с «максимальными усилиями», best effort); накладные расходы на заголовки. Компенсируются механизмами QoS и надёжными транспортными протоколами.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q9">
+  <div class="q-num">09</div>
+  <div class="q-body">
+    <h3>Виды коммутации пакетов</h3>
+    <ul class="p">
+      <li><b class="t">Дейтаграммная передача.</b> Каждый пакет обрабатывается независимо; маршрут определяется отдельно для каждого пакета по полному адресу назначения. Предварительного соединения нет, порядок доставки и сам факт доставки не гарантируются, пакеты одного сообщения могут идти разными путями. Примеры: <span class="m">IP</span>, Ethernet, UDP.</li>
+      <li><b class="t">Виртуальный канал (virtual circuit).</b> Перед передачей по сети проходит служебный пакет, прокладывающий фиксированный маршрут; затем все пакеты потока идут по нему, неся короткую <i>метку</i> вместо полного адреса. Порядок сохраняется, задержка предсказуема. Постоянные (PVC, настраивает администратор) и коммутируемые (SVC, устанавливаются по запросу). Примеры: X.25, Frame Relay (DLCI), ATM (VPI/VCI), MPLS (LSP).</li>
+      <li><b class="t">Коммутация сообщений.</b> Сообщение передаётся целиком, без деления, по принципу store-and-forward с длительным хранением в узлах. Применяется там, где задержки некритичны: телеграф, электронная почта, файловые шлюзы.</li>
+      <li><b class="t">Сравнение дейтаграмм и виртуальных каналов:</b>
+        <ul>
+          <li>ВК тратит время на установление, дейтаграмма отправляется сразу → для коротких обменов выгоднее дейтаграммы;</li>
+          <li>поиск по короткой метке быстрее и таблица меньше, чем поиск по полному адресу;</li>
+          <li>ВК позволяет резервировать ресурсы и давать гарантии QoS, дейтаграммная сеть — нет;</li>
+          <li>при отказе узла ВК рвётся и требует переустановления, дейтаграммы просто пойдут в обход;</li>
+          <li>коммутаторы ВК хранят состояние каждого соединения → хуже масштабируемость.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</article>
+<div class="sec" id="s3"><h2>Линии связи и среда передачи</h2><span class="range">10–16</span></div>
+
+<article class="q" id="q10">
+  <div class="q-num">10</div>
+  <div class="q-body">
+    <h3>Физическая среда передачи данных<span class="lvl">L1</span></h3>
+    <p class="lead">Среда передачи — материальная субстанция, по которой распространяется сигнал. <b>Линия связи</b> = физическая среда + аппаратура передачи данных + промежуточная аппаратура.</p>
+    <ul class="p">
+      <li><b class="t">Проводные направляющие системы:</b> медные (витая пара, коаксиальный кабель) и оптические (одномодовое и многомодовое волокно). Сигнал заперт внутри направляющей структуры.</li>
+      <li><b class="t">Беспроводные среды:</b> радиоволны (ДВ/СВ/КВ — огибают Землю, малая полоса; УКВ и СВЧ 2,4 / 5 / 6 ГГц — прямая видимость, широкая полоса), радиорелейные линии, спутниковая связь (GEO — задержка ~250 мс в одну сторону, LEO — единицы–десятки мс), инфракрасная связь, атмосферная оптика (FSO).</li>
+      <li><b class="t">Закономерность:</b> чем выше частота — тем шире доступная полоса и выше возможная скорость, но тем сильнее затухание, тем короче дальность и тем жёстче требование прямой видимости.</li>
+      <li><b class="t">Классификация каналов:</b> аналоговые и цифровые; выделенные (постоянные) и коммутируемые; симплексные, полудуплексные и дуплексные.</li>
+      <li><b class="t">Критерии выбора среды:</b> пропускная способность, дальность, помехозащищённость, стоимость кабеля и монтажа, защищённость от прослушивания, безопасность и электромагнитная совместимость.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q11">
+  <div class="q-num">11</div>
+  <div class="q-body">
+    <h3>Аппаратура передачи данных<span class="lvl">L1</span></h3>
+    <ul class="p">
+      <li><b class="t">DTE (Data Terminal Equipment), ООД</b> — оконечное оборудование данных: источник или потребитель информации (компьютер, маршрутизатор, терминал). Формирует данные, но не приспособлен к работе с линией напрямую.</li>
+      <li><b class="t">DCE (АПД, аппаратура передачи данных)</b> — преобразует данные к виду, пригодному для конкретной линии, и обратно. Функции: кодирование и декодирование, модуляция и демодуляция, согласование с линией по уровню и импедансу, усиление, синхронизация. Примеры: модем, терминальный адаптер ISDN, устройства DSU/CSU, оптический трансивер (SFP).</li>
+      <li><b class="t">Промежуточная аппаратура</b> стоит внутри линии и для конечных узлов прозрачна: усилители (аналоговые), регенераторы/репитеры (цифровые, восстанавливают форму сигнала), мультиплексоры и демультиплексоры, кросс-коннекты, коммутаторы каналов. Задача — сделать протяжённую линию «прозрачным» каналом.</li>
+      <li><b class="t">Интерфейсы стыка DTE–DCE:</b> RS-232C (V.24/V.28), V.35, X.21, HSSI, USB.</li>
+      <li><b class="t">Стандарты модемов ITU-T:</b> V.34 — 33,6 кбит/с, V.90/V.92 — 56 кбит/с на приём; ADSL2+ — до 24 Мбит/с на приём.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q12">
+  <div class="q-num">12</div>
+  <div class="q-body">
+    <h3>Характеристики линий связи. Затухание и помехоустойчивость</h3>
+    <ul class="p">
+      <li><b class="t">Затухание A</b> — уменьшение мощности сигнала при прохождении линии: <span class="m">A = 10·lg(P<sub>вых</sub>/P<sub>вх</sub>)</span> дБ. Всегда отрицательная величина; часто указывают модуль. Задаётся <i>для конкретной частоты</i> и нормируется на длину (погонное затухание, дБ/км или дБ на 100 м).</li>
+      <li><b class="t">Зависимость от частоты:</b> чем выше частота, тем сильнее затухание в меди — поэтому категория кабеля всегда привязана к частоте.</li>
+      <li><b class="t">Помехоустойчивость</b> — способность линии уменьшать влияние помех. Определяется типом среды (оптоволокно нечувствительно к электромагнитным помехам), экранированием, скруткой проводников, заземлением.</li>
+      <li><b class="t">Перекрёстные наводки</b> — помехи от соседних пар в том же кабеле:
+        <ul>
+          <li><span class="m">NEXT</span> — переходное затухание на ближнем конце (главный параметр витой пары);</li>
+          <li><span class="m">FEXT</span> — на дальнем конце; <span class="m">PS NEXT / PS FEXT</span> — суммарные от всех пар;</li>
+          <li><span class="m">ACR = NEXT − A</span> — запас помехозащищённости; чем больше, тем надёжнее приём.</li>
+        </ul>
+      </li>
+      <li><b class="t">Отношение сигнал/шум:</b> <span class="m">SNR = 10·lg(P<sub>сигн</sub>/P<sub>шум</sub>)</span> дБ — определяет предельную скорость по формуле Шеннона.</li>
+    </ul>
+    <div class="nums"><span><b>UTP кат.5:</b> ≤ −23,6 дБ на 100 МГц/100 м</span><span><b>SMF 1550 нм:</b> 0,2 дБ/км</span><span><b>SMF 1310 нм:</b> 0,35 дБ/км</span></div>
+  </div>
+</article>
+
+<article class="q" id="q13">
+  <div class="q-num">13</div>
+  <div class="q-body">
+    <h3>Достоверность, полоса пропускания и пропускная способность</h3>
+    <ul class="p">
+      <li><b class="t">Достоверность передачи</b> характеризуется интенсивностью битовых ошибок <span class="m">BER</span> — вероятностью искажения бита. Без дополнительных средств: медные линии <span class="m">10⁻⁴…10⁻⁶</span>, волоконно-оптические <span class="m">10⁻⁹…10⁻¹²</span>. Повышается помехоустойчивым кодированием (FEC) и повторной передачей.</li>
+      <li><b class="t">Полоса пропускания (bandwidth), Гц</b> — непрерывный диапазон частот, который линия передаёт с затуханием не более 3 дБ (то есть теряя не более половины мощности). Это свойство самой линии, не зависящее от способа передачи.</li>
+      <li><b class="t">Пропускная способность (capacity), бит/с</b> — максимальная скорость передачи данных. Зависит от полосы пропускания, от уровня шума и от выбранного метода кодирования/модуляции.</li>
+      <li><b class="t">Формула Найквиста</b> (канал без шума): <span class="m">C = 2·F·log₂M</span>, где M — число различимых состояний сигнала. Увеличивая M, скорость можно наращивать сколь угодно — но только при отсутствии шума.</li>
+      <li><b class="t">Формула Шеннона</b> (реальный канал с шумом): <span class="m">C = F·log₂(1 + P<sub>с</sub>/P<sub>ш</sub>)</span> — абсолютный предел, не зависящий от способа кодирования.</li>
+      <li><b class="t">Классический расчёт:</b> телефонный канал F = 3,1 кГц, SNR ≈ 35 дБ → C ≈ 36 кбит/с. Отсюда и «потолок» модемов V.34 в 33,6 кбит/с.</li>
+      <li><b class="t">Различайте:</b> пропускную способность линии, канала и <i>полезную</i> (эффективную) пропускную способность — скорость передачи только пользовательских данных, без заголовков, квитанций и повторов.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q14">
+  <div class="q-num">14</div>
+  <div class="q-body">
+    <h3>Типы кабелей. Витая пара</h3>
+    <p class="lead">Два изолированных проводника, свитых с определённым шагом. Скрутка превращает пару в слабый излучатель и слабый приёмник помех; шаг скрутки у разных пар в кабеле <b>различен</b> — это снижает взаимные наводки.</p>
+    <ul class="p">
+      <li><b class="t">По экранированию:</b> UTP — неэкранированная; F/UTP (FTP) — общий экран из фольги; S/FTP — общий экран-оплётка плюс фольга на каждой паре; STP — экран на каждой паре. Экран обязательно заземляется с одной стороны, иначе превращается в антенну и делает только хуже.</li>
+      <li><b class="t">Категории</b> (ISO/IEC 11801, TIA/EIA-568) — по максимальной рабочей частоте.</li>
+    </ul>
+    <div class="scroll"><table>
+      <tr><th>Кат.</th><th>Полоса</th><th>Типовое применение</th></tr>
+      <tr><td class="n">Cat 3</td><td class="n">16 МГц</td><td>10BASE-T, телефония</td></tr>
+      <tr><td class="n">Cat 5</td><td class="n">100 МГц</td><td>100BASE-TX</td></tr>
+      <tr><td class="n">Cat 5e</td><td class="n">100 МГц</td><td>1000BASE-T (все 4 пары)</td></tr>
+      <tr><td class="n">Cat 6</td><td class="n">250 МГц</td><td>1 Гбит/с; 10G до 55 м</td></tr>
+      <tr><td class="n">Cat 6A</td><td class="n">500 МГц</td><td>10GBASE-T на все 100 м</td></tr>
+      <tr><td class="n">Cat 7 / 7A</td><td class="n">600 / 1000 МГц</td><td>экранированная, разъём GG45/TERA</td></tr>
+      <tr><td class="n">Cat 8</td><td class="n">2000 МГц</td><td>25/40 Гбит/с, до 30 м (ЦОД)</td></tr>
+    </table></div>
+    <ul class="p" style="margin-top:9px">
+      <li><b class="t">Длина сегмента — 100 м:</b> 90 м стационарной горизонтальной проводки + до 10 м коммутационных шнуров суммарно.</li>
+      <li><b class="t">Разъём</b> RJ-45 (8P8C), схемы разводки T568A и T568B. Прямой кабель (одинаковая разводка с обеих сторон) — узел–коммутатор; перекрёстный, кроссовер — узел–узел или коммутатор–коммутатор. Современные порты поддерживают <span class="m">Auto-MDI/MDIX</span> и определяют тип сами.</li>
+      <li><b class="t">Плюсы:</b> дёшево, гибко, простой монтаж, поддержка питания по кабелю PoE (802.3af — 15,4 Вт, 802.3at — 30 Вт, 802.3bt — до 90 Вт). <b class="t">Минусы:</b> ограничение 100 м, чувствительность к помехам и наводкам.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q15">
+  <div class="q-num">15</div>
+  <div class="q-body">
+    <h3>Типы кабелей. Коаксиальный кабель</h3>
+    <p class="lead">Конструкция соосная (коаксиальная): центральный проводник — слой диэлектрика — экран-оплётка (он же второй проводник) — внешняя защитная оболочка. Экран полностью окружает сигнальную жилу, поэтому помехозащищённость и полоса на больших длинах выше, чем у витой пары.</p>
+    <ul class="p">
+      <li><b class="t">«Толстый» коаксиал</b> — RG-8, стандарт <span class="m">10BASE5</span>: волновое сопротивление 50 Ом, жёлтая оболочка, сегмент до 500 м, до 100 узлов, подключение через «вампир»-зажим и внешний трансивер с AUI-кабелем; отводы через каждые 2,5 м (метки на кабеле).</li>
+      <li><b class="t">«Тонкий» коаксиал</b> — RG-58, стандарт <span class="m">10BASE2</span>: 50 Ом, сегмент до 185 м, до 30 узлов, T-коннекторы BNC прямо в сетевую карту, минимальное расстояние между отводами 0,5 м. Дешевле и гибче, но менее надёжен механически.</li>
+      <li><b class="t">Обязательное условие шины:</b> на обоих концах сегмента — согласующие терминаторы 50 Ом, один из них заземляется. Без терминатора сигнал отражается и сеть не работает.</li>
+      <li><b class="t">Правило 5-4-3:</b> между любыми двумя узлами не более 5 сегментов, соединённых 4 повторителями, причём только 3 сегмента могут быть нагруженными (с узлами), остальные — межрепитерные.</li>
+      <li><b class="t">Слабое место:</b> любой обрыв или плохой контакт выводит из строя весь сегмент, а поиск неисправности требует обхода всей линии. Именно поэтому коаксиал вытеснен витой парой.</li>
+      <li><b class="t">Где живёт сегодня:</b> 75 Ом (RG-6, RG-11) — кабельное телевидение и доступ DOCSIS, антенные фидеры, измерительная техника.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q16">
+  <div class="q-num">16</div>
+  <div class="q-body">
+    <h3>Типы кабелей. Волоконно-оптический кабель</h3>
+    <p class="lead">Сердцевина (core) из сверхчистого кварца окружена оболочкой (cladding) с чуть меньшим показателем преломления. Луч, входящий под углом меньше критического, испытывает <b>полное внутреннее отражение</b> и распространяется по сердцевине. Сверху — лаковое покрытие, буфер, силовые элементы (кевлар), внешняя оболочка.</p>
+    <ul class="p">
+      <li><b class="t">Многомодовое волокно (MMF)</b> — сердцевина 50 или 62,5 мкм при оболочке 125 мкм. По ней идёт множество лучей-мод разными путями, поэтому импульс расплывается — <i>межмодовая дисперсия</i> ограничивает дальность. Источник дешёвый: светодиод или VCSEL, окна 850 и 1300 нм. Классы OM1–OM5: 10 Гбит/с — 300 м (OM3), 400 м (OM4). Применение: внутри здания, ЦОД.</li>
+      <li><b class="t">Одномодовое волокно (SMF)</b> — сердцевина ~9 мкм, проходит единственная мода, дисперсия минимальна. Источник — лазер, окна 1310 и 1550 нм. Дальность десятки и сотни километров. Применение: магистрали, городские сети, PON.</li>
+      <li><b class="t">Окна прозрачности:</b> 850 нм (≈3 дБ/км), 1310 нм (0,35 дБ/км), 1550 нм (0,2 дБ/км) — в последнем работают оптические усилители EDFA и системы DWDM.</li>
+      <li><b class="t">Достоинства:</b> огромная полоса (десятки ТГц, десятки и сотни длин волн в одном волокне); малое затухание → усилители через 80–100 км вместо каждых 2–3 км; полная невосприимчивость к электромагнитным помехам и отсутствие собственного излучения → высокая защищённость от прослушивания; гальваническая развязка сегментов; малый вес и диаметр.</li>
+      <li><b class="t">Недостатки:</b> дорогой монтаж, нужны сварочный аппарат и рефлектометр; хрупкость волокна и ограничение на радиус изгиба; сложнее ремонт в полевых условиях.</li>
+      <li><b class="t">Ограничивающие факторы:</b> дисперсия (модовая, хроматическая, поляризационная) и нелинейные эффекты на большой мощности. <b class="t">Разъёмы:</b> SC, LC, ST, FC, MPO/MTP (многоволоконный).</li>
+    </ul>
+  </div>
+</article>
+<div class="sec" id="s4"><h2>Локальные сети и Ethernet</h2><span class="range">17–24</span></div>
+
+<article class="q" id="q17">
+  <div class="q-num">17</div>
+  <div class="q-body">
+    <h3>Стандартизация технологий локальных сетей</h3>
+    <p class="lead">Ключевую роль играет комитет <b>IEEE 802</b>, созданный в феврале 1980 года (отсюда и номер: 80-й год, 2-й месяц). Он стандартизует физический уровень и канальный уровень локальных сетей.</p>
+    <ul class="p">
+      <li><b class="t">Канальный уровень разделён на два подуровня:</b>
+        <ul>
+          <li><span class="m">LLC</span> (Logical Link Control, 802.2) — общий для всех технологий, обеспечивает интерфейс к сетевому уровню и не зависит от среды;</li>
+          <li><span class="m">MAC</span> (Media Access Control) — свой для каждой технологии: правила доступа к разделяемой среде и формат кадра.</li>
+        </ul>
+        Такое деление позволяет одному и тому же IP работать поверх Ethernet, Token Ring или Wi-Fi.
+      </li>
+      <li><b class="t">Режимы LLC:</b> LLC1 — без установления соединения и без подтверждения (используется в связке с IP); LLC2 — с установлением соединения и подтверждением, процедура типа HDLC; LLC3 — без соединения, но с подтверждением.</li>
+      <li><b class="t">Рабочие группы IEEE 802:</b> 802.1 — общие вопросы, мосты, связующее дерево STP, виртуальные сети 802.1Q, приоритеты 802.1p, контроль доступа 802.1X; 802.2 — LLC; <b>802.3 — Ethernet/CSMA-CD</b>; 802.4 — Token Bus; 802.5 — Token Ring; <b>802.11 — Wi-Fi</b>; 802.15 — персональные сети и Bluetooth; 802.16 — WiMAX.</li>
+      <li><b class="t">Другие организации:</b> ISO/IEC (11801 — стандарт СКС), ANSI (FDDI), TIA/EIA-568 (кабельные системы), IETF (документы RFC для TCP/IP), ITU-T (телекоммуникации), ETSI.</li>
+      <li><b class="t">Смысл стандартизации:</b> совместимость оборудования разных производителей, конкуренция и снижение цены, возможность строить многовендорную сеть и планомерно её развивать.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q18">
+  <div class="q-num">18</div>
+  <div class="q-body">
+    <h3>MAC-адрес. Структура и назначение<span class="lvl">L2</span></h3>
+    <p class="lead">Аппаратный (локальный) адрес канального уровня. Длина <b>6 байт = 48 бит</b> (формат EUI-48), записывается шестью парами шестнадцатеричных цифр: <span class="m">00-1B-44-11-3A-B7</span>.</p>
+    <ul class="p">
+      <li><b class="t">Структура:</b> старшие 3 байта — <span class="m">OUI</span> (Organizationally Unique Identifier), уникальный код производителя, который он покупает у IEEE; младшие 3 байта производитель назначает сам, обеспечивая уникальность внутри своего блока. Итог — глобально уникальный адрес, «зашитый» в сетевой адаптер.</li>
+      <li><b class="t">Два служебных бита в первом байте:</b>
+        <ul>
+          <li><span class="m">I/G</span> (младший бит первого байта): 0 — индивидуальный адрес, 1 — групповой;</li>
+          <li><span class="m">U/L</span> (следующий бит): 0 — глобально администрируемый (по OUI), 1 — назначенный локально администратором.</li>
+        </ul>
+      </li>
+      <li><b class="t">Типы адресов:</b> <i>индивидуальный</i> (unicast) — один интерфейс; <i>групповой</i> (multicast) — например, <span class="m">01-00-5E-xx-xx-xx</span> для IPv4-групп, <span class="m">01-80-C2-00-00-00</span> для кадров STP; <i>широковещательный</i> (broadcast) — <span class="m">FF-FF-FF-FF-FF-FF</span>, принимают все узлы сети.</li>
+      <li><b class="t">Назначение:</b> адресация в пределах одной сети (одного широковещательного домена). По нему коммутаторы строят таблицу и продвигают кадры. За пределы маршрутизатора MAC-адрес не выходит — на каждом участке он свой.</li>
+      <li><b class="t">Плоская адресация:</b> в MAC-адресе нет номера сети, он не иерархичен, поэтому по нему нельзя маршрутизировать — только «запоминать» и «затоплять». Соответствие «IP → MAC» устанавливает протокол <span class="m">ARP</span> (в IPv6 — Neighbor Discovery).</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q19">
+  <div class="q-num">19</div>
+  <div class="q-body">
+    <h3>Формат кадра технологии Ethernet<span class="lvl">L2</span></h3>
+    <div class="scroll">
+      <div class="frame">
+        <div class="pre" style="flex:7">Преамбула<small>7 байт</small></div>
+        <div class="pre" style="flex:2">SFD<small>1</small></div>
+        <div style="flex:6">DA<small>6 байт</small></div>
+        <div style="flex:6">SA<small>6 байт</small></div>
+        <div style="flex:3.4">Тип/Длина<small>2</small></div>
+        <div style="flex:20">Данные + Pad<small>46–1500 байт</small></div>
+        <div style="flex:4.4">FCS<small>4 байта</small></div>
+      </div>
+      <div class="ruler" style="grid-template-columns:repeat(2,1fr)"><span>не входит в тело кадра</span><span>кадр: 64–1518 байт</span></div>
+    </div>
+    <ul class="p" style="margin-top:10px">
+      <li><b class="t">Преамбула</b> — 7 байт <span class="m">10101010</span> для вхождения приёмника в синхронизм, затем <b class="t">SFD</b> (начальный ограничитель) — 1 байт <span class="m">10101011</span>; два последних единичных бита говорят «дальше идёт кадр».</li>
+      <li><b class="t">DA</b> — MAC-адрес назначения (6 байт), <b class="t">SA</b> — MAC-адрес источника (6 байт).</li>
+      <li><b class="t">Поле «Длина/Тип» (2 байта)</b> — двойного назначения: значение <span class="m">≤ 1500</span> означает длину поля данных (кадр 802.3), значение <span class="m">≥ 1536 (0x0600)</span> — код вложенного протокола (кадр Ethernet II / DIX): <span class="m">0x0800</span> — IPv4, <span class="m">0x0806</span> — ARP, <span class="m">0x86DD</span> — IPv6, <span class="m">0x8100</span> — тег VLAN 802.1Q.</li>
+      <li><b class="t">Данные</b> — от 46 до 1500 байт (MTU = 1500). Если данных меньше 46 байт, добавляется заполнитель <b>Pad</b>, чтобы кадр был не короче минимального.</li>
+      <li><b class="t">FCS</b> — контрольная последовательность, CRC-32, считается по полям от DA до конца данных. Кадр с неверной CRC молча отбрасывается.</li>
+      <li><b class="t">Разновидности кадра:</b> Ethernet II (DIX) — чаще всего; 802.3/LLC; Raw 802.3 (Novell); 802.3/SNAP.</li>
+    </ul>
+    <div class="nums"><span><b>мин. кадр:</b> 64 байта</span><span><b>макс.:</b> 1518 (1522 с VLAN)</span><span><b>MTU:</b> 1500</span><span><b>IPG:</b> 96 бит-интервалов</span></div>
+  </div>
+</article>
+
+<article class="q" id="q20">
+  <div class="q-num">20</div>
+  <div class="q-body">
+    <h3>Ethernet на разделяемой среде. Доступ к среде и передача данных<span class="lvl">L2</span></h3>
+    <p class="lead">Метод доступа — <b>CSMA/CD</b> (Carrier Sense Multiple Access with Collision Detection), множественный доступ с контролем несущей и обнаружением коллизий. Метод случайный (недетерминированный): момент получения доступа заранее не известен.</p>
+    <ul class="p">
+      <li><b class="t">Алгоритм передачи:</b>
+        <ul>
+          <li>прослушать среду — есть ли несущая (идёт ли чужая передача);</li>
+          <li>если среда занята — ждать её освобождения;</li>
+          <li>после освобождения выдержать межкадровый интервал <span class="m">IPG = 9,6 мкс</span> (96 бит-интервалов) — чтобы приёмники успели обработать предыдущий кадр;</li>
+          <li>начать передачу кадра, одновременно продолжая слушать среду;</li>
+          <li>если до конца передачи коллизии не было — кадр считается переданным успешно.</li>
+        </ul>
+      </li>
+      <li><b class="t">Кодирование:</b> на 10 Мбит/с — манчестерский код, самосинхронизирующийся: в середине каждого битового интервала обязательно есть перепад. Наличие перепадов и есть «несущая», по ней определяется занятость среды.</li>
+      <li><b class="t">Приём:</b> кадр физически получают все узлы сегмента, но обрабатывает его только тот, чей MAC совпал с адресом назначения (либо адрес широковещательный или групповой); остальные отбрасывают кадр на уровне адаптера.</li>
+      <li><b class="t">Домен коллизий</b> — все узлы, разделяющие одну среду и способные помешать друг другу. Режим передачи — полудуплекс: узел либо передаёт, либо принимает.</li>
+      <li><b class="t">Следствие:</b> номинальная скорость (10 Мбит/с) делится между всеми узлами; реальная полезная пропускная способность заметно ниже из-за служебных полей, межкадровых интервалов и коллизий.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q21">
+  <div class="q-num">21</div>
+  <div class="q-body">
+    <h3>Ethernet на разделяемой среде. Коллизии<span class="lvl">L2</span></h3>
+    <p class="lead">Коллизия — наложение сигналов двух и более станций, начавших передачу практически одновременно (из-за конечного времени распространения сигнала каждая считала среду свободной). Для CSMA/CD это <b>штатная ситуация</b>, а не ошибка.</p>
+    <ul class="p">
+      <li><b class="t">Реакция станции:</b> обнаружив искажение сигнала, станция немедленно прерывает передачу и выдаёт <b>jam-последовательность</b> длиной 32 бита, чтобы коллизию гарантированно заметили все остальные.</li>
+      <li><b class="t">Отсрочка — двоичный экспоненциальный алгоритм:</b> пауза = <span class="m">L × 512</span> бит-интервалов, где L — случайное целое из диапазона <span class="m">[0, 2ᴺ − 1]</span>, N — номер попытки. N растёт до 10, всего допускается <b>16 попыток</b>; после 16-й кадр отбрасывается, и о проблеме сообщается верхнему уровню.</li>
+      <li><b class="t">Условие обнаружения коллизии:</b> станция должна ещё передавать в момент, когда до неё дойдёт «эхо» столкновения, то есть время передачи кадра ≥ удвоенного времени распространения по сети (2×PDV). Отсюда <i>одновременно</i> следуют два ограничения: минимальная длина кадра <b>64 байта (512 бит)</b> и максимальный диаметр сети.</li>
+      <li><b class="t">Максимальный диаметр:</b> 2500 м для 10 Мбит/с (5 сегментов по 500 м), около 200 м для Fast Ethernet. Для Gigabit Ethernet в полудуплексе пришлось вводить <i>расширение носителя</i> (carrier extension) до 512 байт.</li>
+      <li><b class="t">Поздняя коллизия (late collision)</b> — обнаруженная после передачи 512 бит. Это уже неисправность: превышен диаметр сети, дуплекс не согласован или повреждён кабель.</li>
+      <li><b class="t">Производительность:</b> при загрузке сегмента выше 30–40 % число коллизий лавинообразно растёт и полезная пропускная способность падает. Решение — микросегментация коммутаторами и переход на полный дуплекс, где коллизий нет вообще.</li>
+    </ul>
+    <div class="nums"><span><b>слот (10 Мбит/с):</b> 512 бит = 51,2 мкс</span><span><b>jam:</b> 32 бита</span><span><b>попыток:</b> 16</span><span><b>N ≤</b> 10</span></div>
+  </div>
+</article>
+
+<article class="q" id="q22">
+  <div class="q-num">22</div>
+  <div class="q-body">
+    <h3>Понятие моста. Алгоритм прозрачного моста<span class="lvl">L2</span></h3>
+    <p class="lead">Мост (bridge) делит сеть на сегменты и передаёт между ними только те кадры, которые действительно адресованы в другой сегмент. Каждый сегмент становится <b>отдельным доменом коллизий</b>, а локальный трафик остаётся внутри своего сегмента.</p>
+    <ul class="p">
+      <li><b class="t">«Прозрачный» (802.1D)</b> — значит невидимый для узлов: им не нужна никакая настройка, они не знают о его существовании и адресуют кадры так же, как в одном сегменте.</li>
+      <li><b class="t">Алгоритм работы — три операции:</b>
+        <ul>
+          <li><b>Обучение (learning).</b> Приняв кадр, мост смотрит на <i>адрес источника</i> и записывает в таблицу продвижения пару «MAC → порт, откуда пришёл кадр». Записи имеют время жизни (aging time, по умолчанию 300 с) и обновляются, что позволяет переносить узлы между портами.</li>
+          <li><b>Продвижение и фильтрация (forwarding / filtering).</b> Ищем <i>адрес назначения</i> в таблице. Если найден и указывает на тот же порт, откуда пришёл кадр, — адресат в том же сегменте, кадр <i>отбрасывается</i> (фильтрация). Если указывает на другой порт — кадр передаётся только туда.</li>
+          <li><b>Затопление (flooding).</b> Если адрес назначения в таблице отсутствует, а также для широковещательных и групповых кадров, кадр рассылается во все порты, кроме входного.</li>
+        </ul>
+      </li>
+      <li><b class="t">Проверка целостности:</b> перед продвижением мост проверяет FCS и отбрасывает искажённые кадры — в отличие от повторителя, который транслирует всё подряд.</li>
+      <li><b class="t">Проблема петель:</b> при наличии замкнутого контура кадры размножаются бесконечно, таблица «дребезжит» (один MAC виден то с одного порта, то с другого), начинается широковещательный шторм. Решение — протокол связующего дерева <span class="m">STP (802.1D)</span> и его быстрая версия <span class="m">RSTP (802.1w)</span>, которые логически блокируют избыточные связи, оставляя их как резерв.</li>
+      <li><b class="t">Ограничение:</b> мост делит домены коллизий, но <i>не делит</i> широковещательный домен — broadcast проходит через него всегда. Разделить широковещательные домены может только маршрутизатор или VLAN.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q23">
+  <div class="q-num">23</div>
+  <div class="q-body">
+    <h3>Коммутаторы. Общие понятия и дуплексный режим работы<span class="lvl">L2</span></h3>
+    <p class="lead">Коммутатор (switch) — это мост с <b>параллельной</b> обработкой кадров: он способен одновременно передавать кадры между несколькими независимыми парами портов. Логика продвижения та же, что у прозрачного моста, но реализована аппаратно на каждом порту.</p>
+    <ul class="p">
+      <li><b class="t">Архитектуры:</b> коммутационная матрица (crossbar) — быстро, но сложность растёт как N²; общая шина с разделением времени; разделяемая многовходовая память; в крупных устройствах — комбинированные схемы.</li>
+      <li><b class="t">Микросегментация:</b> к каждому порту подключается один узел, и домен коллизий сжимается до одной линии «порт–узел». Каждый узел получает полную скорость порта, а не долю от общей.</li>
+      <li><b class="t">Режимы продвижения:</b>
+        <ul>
+          <li><i>store-and-forward</i> — кадр принимается целиком, проверяется CRC, только потом передаётся: битые кадры не распространяются, но задержка больше;</li>
+          <li><i>cut-through</i> — передача начинается сразу после приёма первых 6 байт (адреса назначения); задержка минимальна, но ошибочные кадры проходят;</li>
+          <li><i>fragment-free</i> — компромисс: ждём первые 64 байта, отсекая «обрывки» от коллизий.</li>
+        </ul>
+      </li>
+      <li><b class="t">Полный дуплекс.</b> В витой паре и оптике приём и передача идут по разным парам/волокнам, поэтому при соединении «порт коммутатора — один узел» коллизий быть не может: алгоритм CSMA/CD <b>отключается</b>, и обе стороны передают одновременно. Пропускная способность порта фактически удваивается: 100 Мбит/с в каждую сторону, 200 Мбит/с суммарно.</li>
+      <li><b class="t">Автосогласование (802.3u):</b> порты сами договариваются о скорости и режиме дуплекса. Рассогласование режимов (duplex mismatch) — классическая неисправность: связь есть, но скорость падает в разы, растут коллизии и ошибки FCS.</li>
+      <li><b class="t">Обратная сторона дуплекса:</b> исчезает естественный «тормоз» — раньше занятость среды сдерживала отправителя. Теперь нужен явный контроль перегрузки (см. вопрос 24).</li>
+      <li><b class="t">Дополнительные функции:</b> VLAN (802.1Q), STP/RSTP, агрегирование каналов (LACP, 802.3ad), зеркалирование портов, приоритеты и QoS (802.1p), питание PoE, ограничение скорости и защита от штормов.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q24">
+  <div class="q-num">24</div>
+  <div class="q-body">
+    <h3>Коммутаторы. Неблокирующие коммутаторы. Борьба с перегрузками<span class="lvl">L2</span></h3>
+    <ul class="p">
+      <li><b class="t">Неблокирующий коммутатор</b> — такой, который передаёт кадры со скоростью их поступления сразу на всех портах, не создавая собственных задержек и потерь. Условие — суммарная производительность коммутационной матрицы не меньше суммарной скорости всех портов: <span class="m">C<sub>к</sub> ≥ Σ C<sub>пi</sub></span>, причём при полном дуплексе трафик каждого порта учитывается дважды (вход и выход).</li>
+      <li><b class="t">Мгновенно неблокирующий</b> — справляется с любым распределением трафика в любой момент, буферы не нужны. <b class="t">Неблокирующий «в среднем»</b> — справляется с усреднённой нагрузкой, а пульсации сглаживает буферизацией; это обычный практический случай.</li>
+      <li><b class="t">Причины перегрузки</b> даже у неблокирующего коммутатора:
+        <ul>
+          <li>несколько входных портов одновременно шлют в один выходной («воронка»);</li>
+          <li>несогласованность скоростей: порт 1 Гбит/с отдаёт в порт 100 Мбит/с;</li>
+          <li>длинные пульсации трафика, переполняющие очередь.</li>
+        </ul>
+      </li>
+      <li><b class="t">Средства борьбы:</b>
+        <ul>
+          <li><b>буферизация</b> — очереди на портах и общий пул памяти; сглаживает всплески, но при длительной перегрузке лишь оттягивает потери;</li>
+          <li><b>управление потоком в дуплексе</b> — кадры <span class="m">PAUSE</span> протокола 802.3x: перегруженный порт просит соседа замолчать на указанное число квантов по 512 бит-интервалов;</li>
+          <li><b>«обратное давление» (backpressure)</b> в полудуплексе — коммутатор искусственно создаёт коллизию или удерживает среду занятой, вынуждая соседа притормозить;</li>
+          <li><b>приоритезация и QoS</b> — несколько очередей на порт, метки 802.1p, дисциплины обслуживания (строгий приоритет, взвешенный циклический WRR);</li>
+          <li><b>агрегирование каналов</b> и увеличение скорости восходящего канала (uplink) как инженерное решение.</li>
+        </ul>
+      </li>
+      <li><b class="t">Паспортные характеристики коммутатора:</b> скорость фильтрации и скорость продвижения (кадров в секунду, pps), пропускная способность (Мбит/с), задержка, размер адресной таблицы (число MAC-адресов), объём буферной памяти.</li>
+    </ul>
+    <div class="nums"><span><b>64-байтный кадр:</b> 14 880 кадр/с на 10 Мбит/с</span><span><b>PAUSE-квант:</b> 512 бит-интервалов</span></div>
+  </div>
+</article>
+<div class="sec" id="s5"><h2>Стек TCP/IP и адресация</h2><span class="range">25–30</span></div>
+
+<article class="q" id="q25">
+  <div class="q-num">25</div>
+  <div class="q-body">
+    <h3>Структура стека TCP/IP. Протокольные единицы данных</h3>
+    <p class="lead">Стек состоит из <b>четырёх</b> уровней (нумерация снизу вверх).</p>
+    <div class="scroll"><table>
+      <tr><th>Уровень TCP/IP</th><th>Соответствие OSI</th><th>Протоколы</th><th>PDU</th></tr>
+      <tr><td>IV. Прикладной</td><td class="n">L5–L7</td><td>HTTP, FTP, SMTP, DNS, SNMP, Telnet</td><td>сообщение / поток</td></tr>
+      <tr><td>III. Транспортный (основной)</td><td class="n">L4</td><td>TCP, UDP</td><td>сегмент / дейтаграмма UDP</td></tr>
+      <tr><td>II. Межсетевой (Internet)</td><td class="n">L3</td><td>IP, ICMP, IGMP, OSPF, BGP</td><td>IP-пакет (дейтаграмма)</td></tr>
+      <tr><td>I. Сетевых интерфейсов</td><td class="n">L1–L2</td><td>Ethernet, PPP, Wi-Fi, ATM, драйверы</td><td>кадр</td></tr>
+    </table></div>
+    <ul class="p" style="margin-top:10px">
+      <li><b class="t">Инкапсуляция:</b> данные приложения → добавляется заголовок TCP → получается <b>сегмент</b> → добавляется заголовок IP → <b>пакет</b> → добавляется заголовок и концевик канального уровня → <b>кадр</b> → биты в среду.</li>
+      <li><b class="t">Уровень сетевых интерфейсов</b> в стеке не стандартизуется: TCP/IP берёт любую существующую технологию и требует от неё только доставки пакета внутри одной сети.</li>
+      <li><b class="t">Главная идея — «тонкая талия»:</b> единственный протокол IP посередине, а сверху и снизу — сколько угодно разных протоколов. Именно это позволило объединить разнородные сети.</li>
+      <li><b class="t">Принцип сквозной надёжности (end-to-end):</b> сеть работает по принципу «максимальных усилий» (best effort) и ничего не гарантирует; надёжность обеспечивают конечные узлы средствами TCP. Это упрощает и удешевляет маршрутизаторы.</li>
+      <li><b class="t">ARP</b> занимает промежуточное положение между уровнями I и II: он связывает IP-адрес с MAC-адресом.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q26">
+  <div class="q-num">26</div>
+  <div class="q-body">
+    <h3>Типы адресов стека TCP/IP</h3>
+    <p class="lead">Каждый интерфейс узла в сети TCP/IP имеет <b>три</b> типа адресов, работающих на разных уровнях.</p>
+    <ul class="p">
+      <li><b class="t">1. Локальный (аппаратный) адрес</b> — MAC-адрес, адрес технологии канального уровня. Уникален в пределах одной сети; назначается производителем оборудования; формат зависит от технологии. Используется для доставки кадра внутри сегмента.</li>
+      <li><b class="t">2. Сетевой (IP) адрес</b> — 4 байта в IPv4, 16 байт в IPv6. Иерархический: состоит из <i>номера сети</i> и <i>номера узла</i>. Назначается администратором или сервером DHCP, уникален в пределах всей составной сети. Используется для маршрутизации.</li>
+      <li><b class="t">3. Символьный (доменный, DNS) адрес</b> — удобное для человека иерархическое имя вида <span class="m">www.example.com</span>. Назначается администратором домена и разрешается в IP службой DNS.</li>
+      <li><b class="t">Механизмы соответствия:</b> имя ↔ IP — служба <span class="m">DNS</span>; IP ↔ MAC — протокол <span class="m">ARP</span> (в IPv6 — протокол обнаружения соседей NDP).</li>
+      <li><b class="t">По числу адресатов:</b>
+        <ul>
+          <li><i>unicast</i> — индивидуальный, один интерфейс;</li>
+          <li><i>broadcast</i> — широковещательный: ограниченный <span class="m">255.255.255.255</span> (не выходит за пределы сегмента) и направленный (все единицы в узловой части, например 192.168.1.255);</li>
+          <li><i>multicast</i> — групповой, диапазон <span class="m">224.0.0.0/4</span>, доставка всем членам группы;</li>
+          <li><i>anycast</i> — произвольная рассылка: адрес назначен многим узлам, доставка — ближайшему.</li>
+        </ul>
+      </li>
+      <li><b class="t">Особые адреса:</b> <span class="m">0.0.0.0</span> — «этот узел» / маршрут по умолчанию; <span class="m">127.0.0.0/8</span> — петля (loopback); <span class="m">169.254.0.0/16</span> — автоконфигурация APIPA при недоступном DHCP.</li>
+      <li><b class="t">Ключевой момент:</b> адрес принадлежит <i>интерфейсу</i>, а не узлу. У маршрутизатора столько IP-адресов, сколько у него интерфейсов, и все из разных сетей.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q27">
+  <div class="q-num">27</div>
+  <div class="q-body">
+    <h3>Формат IP-адреса. Классы IP-адресов<span class="lvl">L3</span></h3>
+    <p class="lead">IPv4-адрес — 32 бита, записывается в десятичной точечной нотации: четыре октета 0–255, например <span class="m">192.168.10.25</span>. Структура — <b>&lt;номер сети&gt;&lt;номер узла&gt;</b>. В классовой схеме границу между ними определяли старшие биты первого октета.</p>
+    <div class="scroll"><table>
+      <tr><th>Класс</th><th>Старшие биты</th><th>Диапазон 1-го октета</th><th>Сеть/узел</th><th>Сетей</th><th>Узлов в сети</th></tr>
+      <tr><td class="n">A</td><td class="n">0</td><td class="n">1–126</td><td class="n">1 + 3 байта (/8)</td><td class="n">126</td><td class="n">16 777 214</td></tr>
+      <tr><td class="n">B</td><td class="n">10</td><td class="n">128–191</td><td class="n">2 + 2 байта (/16)</td><td class="n">16 384</td><td class="n">65 534</td></tr>
+      <tr><td class="n">C</td><td class="n">110</td><td class="n">192–223</td><td class="n">3 + 1 байт (/24)</td><td class="n">2 097 152</td><td class="n">254</td></tr>
+      <tr><td class="n">D</td><td class="n">1110</td><td class="n">224–239</td><td colspan="3">групповые адреса (multicast)</td></tr>
+      <tr><td class="n">E</td><td class="n">11110</td><td class="n">240–255</td><td colspan="3">зарезервированы для будущего</td></tr>
+    </table></div>
+    <ul class="p" style="margin-top:10px">
+      <li><b class="t">Особые значения:</b> <span class="m">127.x.x.x</span> — петля, пакет не выходит на сеть; узловая часть из всех нулей — адрес самой сети; узловая часть из всех единиц — направленный широковещательный адрес. Поэтому из каждой сети «выпадают» 2 адреса.</li>
+      <li><b class="t">Частные адреса (RFC 1918),</b> не маршрутизируемые в Интернете: <span class="m">10.0.0.0/8</span>, <span class="m">172.16.0.0/12</span>, <span class="m">192.168.0.0/16</span>.</li>
+      <li><b class="t">Недостаток классовой схемы:</b> всего три размера сети. Организации на 300 узлов класса C мало, а класс B (65 тысяч адресов) расходуется почти впустую. Результат — быстрое исчерпание адресов и разрастание таблиц маршрутизации. Отсюда переход к маскам, VLSM и CIDR.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q28">
+  <div class="q-num">28</div>
+  <div class="q-body">
+    <h3>Формат IP-адреса. Использование масок<span class="lvl">L3</span></h3>
+    <p class="lead">Маска — 32-битное число, в котором единицы (подряд, начиная со старшего бита) отмечают биты номера сети, а нули — биты номера узла. Запись: <span class="m">255.255.255.0</span> или префиксная <span class="m">/24</span>. Маска позволяет провести границу сети в <i>любом</i> месте, независимо от класса.</p>
+    <ul class="p">
+      <li><b class="t">Основные операции:</b>
+        <ul>
+          <li>номер сети = <span class="m">IP AND маска</span>;</li>
+          <li>номер узла = <span class="m">IP AND (NOT маска)</span>;</li>
+          <li>широковещательный адрес = <span class="m">номер сети OR (NOT маска)</span>;</li>
+          <li>число узлов = <span class="m">2^(32−n) − 2</span>, где n — длина префикса.</li>
+        </ul>
+      </li>
+      <li><b class="t">Разбиение на подсети (subnetting).</b> Пример: сеть <span class="m">192.168.10.0/24</span> делим на 4 подсети маской <span class="m">/26</span> (255.255.255.192): <span class="m">.0/26</span>, <span class="m">.64/26</span>, <span class="m">.128/26</span>, <span class="m">.192/26</span> — по 62 узла в каждой (2⁶ − 2).</li>
+      <li><b class="t">VLSM</b> (маски переменной длины) — разные подсети одной сети могут иметь разные маски: /30 на линк между маршрутизаторами (2 адреса), /26 на отдел, /24 на большой сегмент. Это экономит адреса.</li>
+      <li><b class="t">В таблице маршрутизации</b> запись всегда хранится как пара «адрес сети + маска». Выбор записи — по <b>самому длинному совпадающему префиксу</b>.</li>
+      <li><b class="t">Суммирование (агрегация) маршрутов</b> — обратная операция: четыре сети <span class="m">/24</span> с общими старшими битами объявляются одной записью <span class="m">/22</span>, что сокращает таблицу.</li>
+      <li><b class="t">Требование:</b> все узлы одного физического сегмента должны иметь одинаковые номер сети и маску, иначе они не «увидят» друг друга напрямую.</li>
+    </ul>
+    <div class="nums"><span><b>/30</b> → 2 узла</span><span><b>/29</b> → 6</span><span><b>/28</b> → 14</span><span><b>/27</b> → 30</span><span><b>/26</b> → 62</span><span><b>/25</b> → 126</span><span><b>/24</b> → 254</span></div>
+  </div>
+</article>
+
+<article class="q" id="q29">
+  <div class="q-num">29</div>
+  <div class="q-body">
+    <h3>Порядок назначения IP-адресов. Автономная сеть и централизованное распределение</h3>
+    <ul class="p">
+      <li><b class="t">Автономная сеть</b> (не подключённая к Интернету). Формально администратор волен назначить любые адреса — достаточно уникальности внутри сети. Практически же следует брать <b>частные адреса RFC 1918</b>: <span class="m">10.0.0.0/8</span>, <span class="m">172.16.0.0/12</span>, <span class="m">192.168.0.0/16</span>. Они не маршрутизируются в Интернете, поэтому при последующем подключении через NAT не возникнет конфликта с чужими публичными адресами и не придётся перенумеровывать сеть.</li>
+      <li><b class="t">Требования при ручном назначении:</b> уникальность адреса, одинаковый номер сети у всех узлов сегмента, корректная маска, отсутствие занятых служебных адресов (адрес сети, broadcast, адрес шлюза).</li>
+      <li><b class="t">Централизованное распределение</b> — единственный способ гарантировать глобальную уникальность публичных адресов. Иерархия:
+        <ul>
+          <li><span class="m">IANA</span> (в составе ICANN) — верхний уровень, распоряжается всем пространством;</li>
+          <li><b>региональные регистратуры RIR</b>, их пять: <span class="m">RIPE NCC</span> (Европа, Россия, Ближний Восток), ARIN (Северная Америка), APNIC (Азия и Тихий океан), LACNIC (Латинская Америка), AFRINIC (Африка);</li>
+          <li><b>локальные регистратуры LIR</b> и провайдеры, которые выдают блоки клиентам.</li>
+        </ul>
+      </li>
+      <li><b class="t">PA и PI адреса:</b> адреса, выданные провайдером (provider aggregatable), при смене провайдера надо возвращать и сеть перенумеровывать; независимые адреса (provider independent) остаются у организации, но ухудшают агрегирование маршрутов.</li>
+      <li><b class="t">Способы назначения узлу:</b> вручную (статически — серверы, маршрутизаторы, принтеры), автоматически по <span class="m">DHCP</span>, самоконфигурация <span class="m">APIPA 169.254.0.0/16</span> при недоступном DHCP, в IPv6 — <span class="m">SLAAC</span>.</li>
+      <li><b class="t">Дефицит IPv4:</b> свободные блоки IANA закончились в 2011 году. Ответные меры: NAT, CIDR, вторичный рынок адресов и переход на IPv6.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q30">
+  <div class="q-num">30</div>
+  <div class="q-body">
+    <h3>Порядок назначения IP-адресов. Технология CIDR</h3>
+    <p class="lead"><b>CIDR</b> (Classless Inter-Domain Routing, бесклассовая междоменная маршрутизация, RFC 1519) — полный отказ от классов. Адрес всегда задаётся парой <span class="m">префикс/длина</span>, а граница между номером сети и номером узла может проходить в любом месте.</p>
+    <ul class="p">
+      <li><b class="t">Две решаемые задачи:</b>
+        <ul>
+          <li><b>экономия адресов</b> — блок выдаётся по реальной потребности: /29, /28, /27, а не «целый класс C» или «целый класс B»;</li>
+          <li><b>сокращение таблиц маршрутизации</b> магистральных маршрутизаторов за счёт агрегирования.</li>
+        </ul>
+      </li>
+      <li><b class="t">Агрегирование (суперсетинг).</b> Непрерывный набор блоков, выданных одному провайдеру, объявляется вовне <i>одной</i> записью. Пример: <span class="m">192.168.0.0/24</span>, <span class="m">192.168.1.0/24</span>, <span class="m">192.168.2.0/24</span>, <span class="m">192.168.3.0/24</span> → <span class="m">192.168.0.0/22</span>. Вместо четырёх записей — одна.</li>
+      <li><b class="t">Условие агрегирования:</b> блоки должны быть смежными и выровненными по границе степени двойки. Отсюда требование распределять адреса <i>иерархически, сверху вниз</i>, в соответствии с топологией провайдеров: IANA → RIR → крупный провайдер → мелкий провайдер → клиент.</li>
+      <li><b class="t">Продвижение — по самому длинному префиксу</b> (longest prefix match): если пакет подходит и под агрегированную запись /16, и под конкретную /24, выбирается /24. Это позволяет «вырезать» исключения из агрегатов.</li>
+      <li><b class="t">Эффект:</b> без CIDR глобальная таблица маршрутизации давно стала бы неуправляемой. CIDR поддерживается протоколом <span class="m">BGP-4</span>, который передаёт маршруты вместе с масками.</li>
+    </ul>
+    <div class="warn"><b>Помните:</b> CIDR не увеличил число адресов — он лишь позволил расходовать их точнее и уменьшил таблицы. Радикальное решение проблемы адресов — IPv6.</div>
+  </div>
+</article>
+<div class="sec" id="s6"><h2>Служба имён и автоконфигурация</h2><span class="range">31–35</span></div>
+
+<article class="q" id="q31">
+  <div class="q-num">31</div>
+  <div class="q-body">
+    <h3>Пространство DNS-имён<span class="lvl">L7</span></h3>
+    <p class="lead"><b>DNS</b> (Domain Name System, RFC 1034/1035) — иерархическая распределённая база данных, ставящая в соответствие символьные имена и IP-адреса. Работает поверх UDP и TCP, порт <span class="m">53</span> (TCP — для зонных передач и больших ответов).</p>
+    <ul class="p">
+      <li><b class="t">Дерево имён.</b> Корень обозначается точкой «<span class="m">.</span>», под ним — домены верхнего уровня, далее второго и т. д. Имя узла читается <i>справа налево</i>, от корня к листу. Метка — до 63 символов, полное имя — до 255 символов, глубина — до 127 уровней.</li>
+      <li><b class="t">FQDN</b> (Fully Qualified Domain Name) — полное доменное имя с точкой в конце: <span class="m">www.example.com.</span></li>
+      <li><b class="t">Домены верхнего уровня:</b> общие gTLD (<span class="m">com, org, net, edu, gov, mil, int, info, biz</span>), национальные ccTLD (<span class="m">ru, su, рф, de, uk</span>), новые gTLD (<span class="m">.shop, .online</span>), а также служебный <span class="m">arpa</span> — в нём находится зона <span class="m">in-addr.arpa</span> для обратного разрешения «IP → имя».</li>
+      <li><b class="t">Домен и зона — разные вещи:</b> <i>домен</i> — всё поддерево имён; <i>зона</i> — часть домена, находящаяся под непосредственным управлением конкретного сервера, то есть домен минус делегированные поддомены.</li>
+      <li><b class="t">Типы ресурсных записей (RR):</b> <span class="m">A</span> — имя → IPv4; <span class="m">AAAA</span> — имя → IPv6; <span class="m">CNAME</span> — псевдоним; <span class="m">MX</span> — почтовый сервер домена; <span class="m">NS</span> — сервер имён зоны; <span class="m">PTR</span> — обратное соответствие; <span class="m">SOA</span> — параметры зоны; <span class="m">TXT</span>, <span class="m">SRV</span>.</li>
+      <li><b class="t">Зачем иерархия:</b> плоская схема (файл <span class="m">hosts</span> со всеми именами) не масштабируется — её невозможно ни синхронизировать, ни администрировать централизованно. Иерархия даёт делегирование полномочий и распределённое хранение.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q32">
+  <div class="q-num">32</div>
+  <div class="q-body">
+    <h3>Иерархическая организация службы DNS. Разделение пространства имён между серверами</h3>
+    <ul class="p">
+      <li><b class="t">Принцип:</b> всё пространство имён разбито на <b>зоны</b>, каждая зона хранится и обслуживается своим набором серверов. Ни один сервер не хранит базу целиком.</li>
+      <li><b class="t">Делегирование.</b> Сервер вышестоящей зоны не хранит данные дочерней, а хранит <span class="m">NS</span>-записи — имена серверов, которые за неё отвечают, и «склеивающие» (glue) A-записи с их адресами. Так строится непрерывная цепочка ссылок от корня к любому имени.</li>
+      <li><b class="t">Резервирование:</b> у каждой зоны должно быть не менее двух серверов — <i>первичный</i> (master, хранит редактируемый файл зоны) и один или несколько <i>вторичных</i> (slave), получающих копию зоны по механизму зонной передачи <span class="m">AXFR</span> (полная) или <span class="m">IXFR</span> (инкрементная) поверх TCP.</li>
+      <li><b class="t">Запись SOA</b> открывает файл зоны и задаёт: серийный номер (по нему вторичный понимает, что зона изменилась), интервалы refresh, retry, expire и минимальный TTL для отрицательного кэширования.</li>
+      <li><b class="t">Типы серверов:</b>
+        <ul>
+          <li><i>авторитетные</i> — хранят зону и отвечают за неё окончательно;</li>
+          <li><i>кэширующие (рекурсивные)</i> — своих зон не имеют, обслуживают запросы клиентов и накапливают ответы;</li>
+          <li><i>корневые</i> — обслуживают корневую зону;</li>
+          <li><i>перенаправляющие (forwarders)</i> — передают запросы вышестоящему серверу.</li>
+        </ul>
+      </li>
+      <li><b class="t">Кэширование</b> — главный механизм масштабирования: ответ хранится время, заданное полем TTL записи, и повторные запросы обслуживаются локально. Есть и отрицательное кэширование (запоминание ответа «такого имени нет»).</li>
+      <li><b class="t">Устойчивость:</b> распределённость означает, что отказ любого сервера выводит из строя лишь свою зону, а не систему в целом.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q33">
+  <div class="q-num">33</div>
+  <div class="q-body">
+    <h3>Рекурсивная и нерекурсивная процедуры разрешения DNS-имён</h3>
+    <ul class="p">
+      <li><b class="t">Рекурсивный запрос.</b> Клиент (резолвер) ставит в запросе флаг <span class="m">RD</span> (Recursion Desired), и сервер <i>обязан</i> вернуть готовый окончательный ответ — либо адрес, либо сообщение об ошибке. Всю работу по опросу других серверов сервер берёт на себя. Клиент при этом предельно прост. Сервер сообщает о своей готовности флагом <span class="m">RA</span> (Recursion Available).</li>
+      <li><b class="t">Нерекурсивная (итеративная) процедура.</b> Если сервер не знает ответа, он не ищет его сам, а возвращает <b>ссылку</b> (referral) — список серверов, находящихся «ближе» к искомому имени. Спрашивающий сам делает следующий запрос. Так серверы общаются между собой; <i>корневые серверы отвечают только итеративно</i>.</li>
+      <li><b class="t">Типовая цепочка разрешения <span class="m">www.example.com</span>:</b>
+        <ul>
+          <li>клиент → локальный DNS-сервер: рекурсивный запрос;</li>
+          <li>локальный → корневой: итеративный запрос → ответ «спроси серверы зоны <span class="m">.com</span>»;</li>
+          <li>локальный → сервер <span class="m">.com</span> → ответ «спроси серверы зоны <span class="m">example.com</span>»;</li>
+          <li>локальный → авторитетный сервер <span class="m">example.com</span> → ответ: A-запись с адресом;</li>
+          <li>локальный кэширует ответ на время TTL и отдаёт его клиенту.</li>
+        </ul>
+      </li>
+      <li><b class="t">Достоинство рекурсии:</b> единый кэш локального сервера обслуживает всех клиентов сети, резко сокращая внешний трафик и задержки.</li>
+      <li><b class="t">Недостатки:</b> нагрузка и состояние на сервере; открытый рекурсивный сервер становится инструментом DDoS-усиления (DNS amplification) и целью отравления кэша (cache poisoning). Защита — ограничение рекурсии «своими» клиентами, случайные порты запроса, <span class="m">DNSSEC</span>.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q34">
+  <div class="q-num">34</div>
+  <div class="q-body">
+    <h3>Корневые серверы. Использование произвольной рассылки</h3>
+    <ul class="p">
+      <li><b class="t">Корневые серверы</b> хранят корневую зону — по сути, NS-записи серверов всех доменов верхнего уровня. Отвечают <i>итеративно</i>: перенаправляют спрашивающего к нужному TLD.</li>
+      <li><b class="t">Их 13 — по числу имён:</b> <span class="m">a.root-servers.net</span> … <span class="m">m.root-servers.net</span>. Число 13 историческое: столько адресов помещалось в стандартный DNS-ответ размером 512 байт в UDP-дейтаграмме.</li>
+      <li><b class="t">Операторы разные,</b> чтобы не было единой точки отказа и единого владельца: Verisign (A и J), USC-ISI (B), Cogent (C), Университет Мэриленда (D), NASA (E), ISC (F), Министерство обороны США (G), Армия США (H), Netnod (I), RIPE NCC (K), ICANN (L), WIDE Project (M).</li>
+      <li><b class="t">Произвольная рассылка (anycast)</b> — один и тот же IP-адрес анонсируется по BGP одновременно из многих точек мира. Обычная маршрутизация сама доставит запрос на <i>ближайший по метрике</i> экземпляр сервера, при этом ни клиент, ни сеть не делают ничего особенного.</li>
+      <li><b class="t">Что это даёт:</b> за 13 логическими адресами стоят более полутора тысяч физических площадок; снижается задержка (сервер рядом); нагрузка распределяется географически; атака DDoS локализуется в одном регионе и не валит службу целиком; при отказе площадки маршрут просто перестраивается на следующую.</li>
+      <li><b class="t">Условие применимости:</b> anycast хорош для протоколов без состояния соединения (UDP, DNS), где смена «отвечающего» экземпляра между запросами безвредна. Также широко используется в CDN и публичных резолверах (<span class="m">8.8.8.8</span>, <span class="m">1.1.1.1</span>).</li>
+      <li><b class="t">Корневые подсказки (root hints)</b> — файл с адресами корневых серверов, зашитый в каждый резолвер; это единственная информация, которую сервер должен знать «изначально».</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q35">
+  <div class="q-num">35</div>
+  <div class="q-body">
+    <h3>Протокол DHCP</h3>
+    <p class="lead"><b>DHCP</b> (Dynamic Host Configuration Protocol, RFC 2131) — протокол автоматической выдачи узлам параметров настройки. Развитие протокола BOOTP. Работает поверх UDP: клиент — порт <span class="m">68</span>, сервер — порт <span class="m">67</span>.</p>
+    <ul class="p">
+      <li><b class="t">Что выдаёт:</b> IP-адрес и маску, адрес шлюза по умолчанию, адреса DNS-серверов, доменное имя, а также десятки дополнительных опций — серверы времени NTP, WINS, адрес TFTP-сервера и имя файла загрузки для PXE, статические маршруты.</li>
+      <li><b class="t">Три режима назначения:</b>
+        <ul>
+          <li><i>ручное</i> — администратор закрепляет за MAC-адресом конкретный IP (резервирование);</li>
+          <li><i>автоматическое</i> — сервер сам выдаёт свободный адрес из пула, но навсегда;</li>
+          <li><i>динамическое</i> — адрес выдаётся во временную <b>аренду</b> (lease) и затем возвращается в пул. Основной режим: позволяет обслуживать больше узлов, чем есть адресов.</li>
+        </ul>
+      </li>
+      <li><b class="t">Процедура получения адреса — DORA (4 сообщения):</b>
+        <ul>
+          <li><span class="m">DHCPDISCOVER</span> — клиент, ещё не имея адреса, шлёт широковещательный запрос от <span class="m">0.0.0.0</span> к <span class="m">255.255.255.255</span>;</li>
+          <li><span class="m">DHCPOFFER</span> — каждый сервер предлагает адрес и параметры;</li>
+          <li><span class="m">DHCPREQUEST</span> — клиент широковещательно объявляет, чьё предложение принял (остальные серверы возвращают свои адреса в пул);</li>
+          <li><span class="m">DHCPACK</span> — выбранный сервер подтверждает, аренда начинается.</li>
+        </ul>
+      </li>
+      <li><b class="t">Продление аренды:</b> по истечении <span class="m">T1 = 50 %</span> срока клиент шлёт REQUEST напрямую своему серверу; если не ответил — в <span class="m">T2 = 87,5 %</span> шлёт широковещательный REQUEST любому серверу; если и это не помогло — по окончании аренды отказывается от адреса и начинает с DISCOVER.</li>
+      <li><b class="t">Прочие сообщения:</b> DHCPNAK (отказ), DHCPDECLINE (адрес уже занят — клиент проверил его ARP-запросом), DHCPRELEASE (досрочный возврат), DHCPINFORM (нужны только параметры, адрес уже есть).</li>
+      <li><b class="t">Через маршрутизатор</b> широковещательные запросы не проходят, поэтому в каждом сегменте нужен либо свой сервер, либо <b>агент ретрансляции</b> (DHCP relay, команда <span class="m">ip helper-address</span>), который пересылает запросы серверу индивидуальным пакетом.</li>
+      <li><b class="t">Риск:</b> чужой («левый») DHCP-сервер может раздать неверный шлюз и перехватить трафик. Защита — <span class="m">DHCP snooping</span> на коммутаторах: разрешать ответы DHCP только с доверенных портов.</li>
+    </ul>
+  </div>
+</article>
+<div class="sec" id="s7"><h2>IP: пакет, маршрутизация, ICMP, IPv6</h2><span class="range">36–42</span></div>
+
+<article class="q" id="q36">
+  <div class="q-num">36</div>
+  <div class="q-body">
+    <h3>Структура заголовка IP-пакета<span class="lvl">L3</span></h3>
+    <div class="scroll">
+      <div class="bits">
+        <div class="f" style="grid-column:span 4">Версия<br>4</div>
+        <div class="f" style="grid-column:span 4">IHL<br>4</div>
+        <div class="f" style="grid-column:span 8">DSCP+ECN<br>8</div>
+        <div class="f k" style="grid-column:span 16">Общая длина · 16</div>
+        <div class="f" style="grid-column:span 16">Идентификатор · 16</div>
+        <div class="f" style="grid-column:span 3">Флаги</div>
+        <div class="f" style="grid-column:span 13">Смещение фрагмента · 13</div>
+        <div class="f k" style="grid-column:span 8">TTL · 8</div>
+        <div class="f k" style="grid-column:span 8">Протокол · 8</div>
+        <div class="f" style="grid-column:span 16">Контрольная сумма заголовка · 16</div>
+        <div class="f k" style="grid-column:span 32">IP-адрес источника · 32</div>
+        <div class="f k" style="grid-column:span 32">IP-адрес назначения · 32</div>
+        <div class="f d" style="grid-column:span 32">Опции + выравнивание (0–40 байт)</div>
+      </div>
+      <div class="ruler"><span>бит 0</span><span>8</span><span>16</span><span>24</span></div>
+    </div>
+    <ul class="p" style="margin-top:10px">
+      <li><b class="t">Версия</b> — 4 для IPv4. <b class="t">IHL</b> — длина заголовка в 32-битных словах: от 5 (20 байт, без опций) до 15 (60 байт).</li>
+      <li><b class="t">Тип сервиса:</b> исторически TOS (приоритет + требования к задержке, пропускной способности, надёжности); сейчас <span class="m">DSCP</span> (6 бит, класс обслуживания для QoS) + <span class="m">ECN</span> (2 бита, явное уведомление о перегрузке).</li>
+      <li><b class="t">Общая длина</b> — длина всего пакета вместе с данными, максимум 65 535 байт.</li>
+      <li><b class="t">Идентификатор, флаги и смещение</b> обслуживают фрагментацию: все фрагменты одного пакета несут общий идентификатор; флаг <span class="m">DF</span> запрещает фрагментировать, <span class="m">MF</span> означает «будут ещё фрагменты»; смещение задаётся в 8-байтных блоках.</li>
+      <li><b class="t">TTL</b> — счётчик, уменьшаемый каждым маршрутизатором на 1; при нуле пакет уничтожается, а источнику шлётся ICMP «истекло время». Защита от вечного блуждания по петле.</li>
+      <li><b class="t">Протокол</b> — код вышестоящего протокола: <span class="m">1</span> — ICMP, <span class="m">2</span> — IGMP, <span class="m">6</span> — TCP, <span class="m">17</span> — UDP, <span class="m">89</span> — OSPF.</li>
+      <li><b class="t">Контрольная сумма</b> считается только по заголовку (не по данным!) и пересчитывается на каждом маршрутизаторе, поскольку TTL меняется.</li>
+      <li><b class="t">Опции</b> (редко используются): запись маршрута, маршрутизация от источника (строгая и свободная), метка времени, метка безопасности.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q37">
+  <div class="q-num">37</div>
+  <div class="q-body">
+    <h3>Схема IP-маршрутизации<span class="lvl">L3</span></h3>
+    <p class="lead">Составная сеть — набор подсетей, соединённых маршрутизаторами. Каждый интерфейс маршрутизатора принадлежит своей подсети и имеет в ней адрес. Продвижение идёт <b>пошагово</b>: каждый узел знает лишь следующий шаг, а не весь маршрут.</p>
+    <ul class="p">
+      <li><b class="t">Таблица маршрутизации</b> — записи вида: <span class="m">адрес сети / маска → адрес следующего маршрутизатора (next hop) → выходной интерфейс → метрика</span>. Плюс маршруты к непосредственно присоединённым сетям и маршрут по умолчанию <span class="m">0.0.0.0/0</span>.</li>
+      <li><b class="t">Алгоритм на узле-отправителе:</b> вычислить номер сети адресата (IP AND своя маска) и сравнить со своим. Совпало — адресат в той же сети, доставляем напрямую: узнаём его MAC по ARP и шлём кадр ему. Не совпало — отдаём пакет <i>шлюзу по умолчанию</i> (кадр адресуется MAC-адресу шлюза, а IP-адрес в пакете остаётся конечным).</li>
+      <li><b class="t">Алгоритм на маршрутизаторе:</b>
+        <ul>
+          <li>принять кадр, проверить его контрольную сумму, извлечь IP-пакет;</li>
+          <li>проверить контрольную сумму заголовка IP; уменьшить TTL на 1, при нуле — отбросить и послать ICMP;</li>
+          <li>найти в таблице запись с самым длинным совпадающим префиксом; если ничего нет — взять маршрут по умолчанию; если нет и его — отбросить пакет и послать ICMP «адресат недостижим»;</li>
+          <li>при необходимости фрагментировать (если MTU выходного интерфейса меньше пакета и флаг DF = 0);</li>
+          <li>определить MAC-адрес следующего узла по ARP, упаковать пакет в <i>новый</i> кадр и передать.</li>
+        </ul>
+      </li>
+      <li><b class="t">Ключевое наблюдение:</b> на каждом участке MAC-адреса источника и назначения меняются, а IP-адреса источника и назначения остаются неизменными (кроме случая трансляции NAT).</li>
+      <li><b class="t">Источники записей в таблице:</b> непосредственно присоединённые сети (автоматически), статические маршруты (администратор), динамические (RIP, OSPF, BGP). При конфликте выбор делается по административному расстоянию, затем по метрике.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q38">
+  <div class="q-num">38</div>
+  <div class="q-body">
+    <h3>Маршрутизация с использованием масок<span class="lvl">L3</span></h3>
+    <ul class="p">
+      <li><b class="t">Постановка задачи:</b> в бесклассовой сети маски записей имеют разную длину и адресные пространства записей могут перекрываться. Нужно однозначное правило выбора.</li>
+      <li><b class="t">Алгоритм:</b> для каждой строки таблицы вычислить <span class="m">IP-адрес назначения AND маска строки</span> и сравнить результат с адресом сети этой строки. Среди <i>всех</i> совпавших строк выбрать ту, у которой маска <b>самая длинная</b> — правило <b>longest prefix match</b>. Более конкретный маршрут всегда побеждает более общий.</li>
+      <li><b class="t">Пример.</b> Пакет для <span class="m">192.168.1.130</span>. В таблице три подходящие записи:
+        <ul>
+          <li><span class="m">192.168.0.0/16</span> → R1 (совпадает);</li>
+          <li><span class="m">192.168.1.0/24</span> → R2 (совпадает, префикс длиннее);</li>
+          <li><span class="m">192.168.1.128/25</span> → R3 (совпадает, префикс самый длинный) — <b>выбирается R3</b>.</li>
+        </ul>
+      </li>
+      <li><b class="t">Маршрут по умолчанию</b> <span class="m">0.0.0.0/0</span> совпадает с любым адресом, но имеет нулевую длину префикса, поэтому автоматически используется последним — специального правила для него не требуется.</li>
+      <li><b class="t">Маршрут к отдельному узлу</b> задаётся маской <span class="m">255.255.255.255 (/32)</span> и выигрывает у всех остальных записей.</li>
+      <li><b class="t">Зачем это нужно:</b> перекрытие адресных пространств позволяет объявлять один агрегированный маршрут и одновременно «вырезать» из него исключения — основа работы CIDR и BGP.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q39">
+  <div class="q-num">39</div>
+  <div class="q-body">
+    <h3>Протокол ICMP. Формат ICMP-сообщения<span class="lvl">L3</span></h3>
+    <p class="lead"><b>ICMP</b> (Internet Control Message Protocol, RFC 792) — служебный протокол сетевого уровня для сообщений об ошибках и диагностики. Сообщения инкапсулируются в IP-пакет (поле «Протокол» = <span class="m">1</span>), но логически ICMP считается частью сетевого уровня, а не транспортным протоколом.</p>
+    <div class="scroll">
+      <div class="bits">
+        <div class="f k" style="grid-column:span 8">Тип · 8</div>
+        <div class="f k" style="grid-column:span 8">Код · 8</div>
+        <div class="f" style="grid-column:span 16">Контрольная сумма · 16</div>
+        <div class="f" style="grid-column:span 32">Поле, зависящее от типа · 32 (идентификатор + номер, MTU, указатель, адрес шлюза)</div>
+        <div class="f d" style="grid-column:span 32">Заголовок исходного IP-пакета + первые 8 байт его данных</div>
+      </div>
+      <div class="ruler"><span>бит 0</span><span>8</span><span>16</span><span>24</span></div>
+    </div>
+    <ul class="p" style="margin-top:10px">
+      <li><b class="t">Зачем возвращается фрагмент исходного пакета:</b> заголовок IP плюс первые 8 байт данных содержат номера портов TCP/UDP, поэтому отправитель понимает, какое именно соединение или приложение пострадало.</li>
+      <li><b class="t">Основные типы сообщений:</b>
+        <ul>
+          <li><span class="m">0</span> — Echo Reply (эхо-ответ);</li>
+          <li><span class="m">3</span> — Destination Unreachable, коды: 0 — сеть недостижима, 1 — узел недостижим, 2 — протокол недоступен, 3 — порт недоступен, 4 — нужна фрагментация, но установлен флаг DF (используется в PMTU Discovery);</li>
+          <li><span class="m">5</span> — Redirect (перенаправление: «для этой сети есть маршрутизатор лучше»);</li>
+          <li><span class="m">8</span> — Echo Request (эхо-запрос);</li>
+          <li><span class="m">11</span> — Time Exceeded, коды: 0 — истёк TTL, 1 — истекло время сборки фрагментов;</li>
+          <li><span class="m">12</span> — Parameter Problem (ошибка в заголовке); <span class="m">13/14</span> — Timestamp.</li>
+        </ul>
+      </li>
+      <li><b class="t">Ограничения, защищающие сеть от лавины:</b> сообщения об ошибках не порождаются в ответ на другое ICMP-сообщение об ошибке, на широковещательные и групповые пакеты, а также на любой фрагмент, кроме первого.</li>
+      <li><b class="t">ICMP не исправляет ошибки</b> и не гарантирует доставку своих сообщений — он только извещает источник, а решение принимают протоколы верхних уровней.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q40">
+  <div class="q-num">40</div>
+  <div class="q-body">
+    <h3>Протокол ICMP. Утилиты ping и traceroute</h3>
+    <ul class="p">
+      <li><b class="t">ping</b> проверяет достижимость узла. Посылает <span class="m">Echo Request (тип 8)</span> и ждёт <span class="m">Echo Reply (тип 0)</span>. Поля <i>идентификатор</i> и <i>номер последовательности</i> позволяют сопоставить ответ с запросом, а вложенная метка времени — вычислить время кругового обхода RTT.</li>
+      <li><b class="t">Что показывает ping:</b> доступность узла, RTT (минимальное / среднее / максимальное) и его разброс (джиттер), процент потерянных пакетов, а также значение TTL в ответе — по нему можно оценить число промежуточных маршрутизаторов.</li>
+      <li><b class="t">traceroute / tracert</b> выявляет маршрут до узла. Идея — искусственное занижение TTL: посылаются пакеты с <span class="m">TTL = 1, 2, 3…</span>; маршрутизатор на N-м шаге уменьшает TTL до нуля, отбрасывает пакет и возвращает <span class="m">Time Exceeded (тип 11)</span> — по адресу источника этого ответа и опознаётся очередной узел маршрута.</li>
+      <li><b class="t">Определение конца пути:</b> в Windows <span class="m">tracert</span> шлёт ICMP-эхо, и конечный узел отвечает Echo Reply; классический UNIX <span class="m">traceroute</span> шлёт UDP-пакеты на заведомо неиспользуемые порты (от 33434), и конечный узел отвечает <span class="m">Destination Unreachable, код 3</span> — «порт недоступен».</li>
+      <li><b class="t">Практика:</b> на каждый шаг обычно посылается 3 пробы, отсюда три значения времени; символ <span class="m">*</span> означает отсутствие ответа — узел фильтрует ICMP или пакет потерян, но это <i>не обязательно</i> означает обрыв маршрута.</li>
+      <li><b class="t">Ограничения:</b> ICMP часто блокируется межсетевыми экранами и ограничивается по скорости; обратный маршрут может отличаться от прямого (асимметрия); при балансировке нагрузки пробы уходят разными путями и картина «смешивается». Отсюда более точные инструменты: <span class="m">mtr</span>, <span class="m">pathping</span>, paris-traceroute.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q41">
+  <div class="q-num">41</div>
+  <div class="q-body">
+    <h3>Формат IPv6-адреса. Типы адресов IPv6<span class="lvl">L3</span></h3>
+    <p class="lead">Адрес IPv6 — <b>128 бит (16 байт)</b>, записывается восемью группами по четыре шестнадцатеричных цифры через двоеточие: <span class="m">2001:0db8:0000:0000:0000:ff00:0042:8329</span>.</p>
+    <ul class="p">
+      <li><b class="t">Правила сокращения:</b> ведущие нули в группе отбрасываются; одна (и только одна) цепочка групп из нулей заменяется двойным двоеточием <span class="m">::</span>. Итог: <span class="m">2001:db8::ff00:42:8329</span>. Петля <span class="m">::1</span>, неопределённый адрес <span class="m">::</span>.</li>
+      <li><b class="t">Структура индивидуального адреса:</b> глобальный префикс маршрутизации (обычно 48 бит, выдаётся провайдером) + идентификатор подсети (16 бит) + <b>идентификатор интерфейса 64 бита</b>. Последний формируется из MAC-адреса по схеме EUI-64 либо генерируется случайно ради приватности (RFC 4941).</li>
+      <li><b class="t">Три типа адресов (широковещательных в IPv6 НЕТ):</b>
+        <ul>
+          <li><b>Индивидуальные (unicast):</b> глобальные <span class="m">2000::/3</span>; канальные <span class="m">fe80::/10</span> — обязательны на каждом интерфейсе, действуют только в пределах сегмента; уникальные локальные <span class="m">fc00::/7</span> — аналог частных адресов IPv4.</li>
+          <li><b>Групповые (multicast)</b> <span class="m">ff00::/8</span>: после префикса идут флаги и <i>область действия</i> (узел, канал, организация, глобально), затем идентификатор группы. Примеры: <span class="m">ff02::1</span> — все узлы сегмента, <span class="m">ff02::2</span> — все маршрутизаторы сегмента.</li>
+          <li><b>Произвольной рассылки (anycast):</b> берутся из обычного unicast-диапазона и назначаются сразу нескольким интерфейсам; пакет доставляется ближайшему. Пример — subnet-router anycast (нули в интерфейсной части).</li>
+        </ul>
+      </li>
+      <li><b class="t">Совместимость с IPv4:</b> отображённые адреса <span class="m">::ffff:192.0.2.1</span>, механизм 6to4 (<span class="m">2002::/16</span>), туннелирование, двойной стек.</li>
+      <li><b class="t">Отличия протокола:</b> заголовок фиксирован — <b>40 байт</b>, контрольной суммы нет, маршрутизаторы не фрагментируют (это делает только отправитель по результатам PMTU Discovery), дополнительные функции вынесены в цепочку расширенных заголовков; ARP заменён протоколом обнаружения соседей NDP, есть автоконфигурация SLAAC.</li>
+    </ul>
+    <div class="warn"><b>На экзамене:</b> широковещание в IPv6 отсутствует полностью — его роль выполняют групповые адреса с нужной областью действия, например ff02::1.</div>
+  </div>
+</article>
+
+<article class="q" id="q42">
+  <div class="q-num">42</div>
+  <div class="q-body">
+    <h3>Классификация протоколов маршрутизации<span class="lvl">L3</span></h3>
+    <ul class="p">
+      <li><b class="t">По способу построения таблицы:</b> <i>статическая</i> маршрутизация (записи вводит администратор — просто, предсказуемо, но не реагирует на отказы) и <i>динамическая</i> (адаптивная) — маршрутизаторы обмениваются служебными сообщениями и перестраивают таблицы сами.</li>
+      <li><b class="t">По области действия:</b>
+        <ul>
+          <li><b>внутренние, IGP</b> — работают внутри одной автономной системы;</li>
+          <li><b>внешние, EGP</b> — между автономными системами.</li>
+        </ul>
+        <b>Автономная система (AS)</b> — совокупность сетей под единым административным управлением и с единой политикой маршрутизации; имеет номер (16 или 32 бита), выдаваемый регистратурой.
+      </li>
+      <li><b class="t">Внутренние протоколы по алгоритму:</b>
+        <ul>
+          <li><b>Дистанционно-векторные</b> (алгоритм Беллмана–Форда). Маршрутизатор знает только расстояния до сетей и периодически рассылает соседям вектор этих расстояний; топологии сети в целом он не видит. Пример — <span class="m">RIP</span>: метрика — число хопов, максимум <b>15</b> (16 = «недостижимо»), обновления каждые 30 с. Просты, но медленно сходятся и страдают от «счёта до бесконечности»; лечится приёмами split horizon, poison reverse, hold-down и триггерными обновлениями.</li>
+          <li><b>Протоколы состояния связей</b> (алгоритм Дейкстры). Каждый маршрутизатор рассылает объявления о состоянии своих связей (LSA), собирает полную базу топологии (LSDB) и сам вычисляет кратчайшие пути. Примеры — <span class="m">OSPF</span> (метрика — стоимость, обратная пропускной способности; деление на области/area) и <span class="m">IS-IS</span>. Быстрая сходимость и масштабируемость ценой большего расхода памяти и процессора.</li>
+          <li><b>Гибридные:</b> <span class="m">EIGRP</span> с алгоритмом DUAL.</li>
+        </ul>
+      </li>
+      <li><b class="t">Внешние:</b> <span class="m">BGP-4</span> — векторно-путевой (path vector) протокол: передаёт не метрику, а полный список автономных систем на пути (AS_PATH), что исключает петли; работает поверх TCP, порт <span class="m">179</span>; выбор маршрута определяется административными политиками, а не «кратчайшим путём».</li>
+      <li><b class="t">По типу адресации:</b> протоколы одноадресной маршрутизации и протоколы групповой маршрутизации (PIM, DVMRP, MOSPF).</li>
+    </ul>
+  </div>
+</article>
+<div class="sec" id="s8"><h2>Транспортный уровень</h2><span class="range">43–46</span></div>
+
+<article class="q" id="q43">
+  <div class="q-num">43</div>
+  <div class="q-body">
+    <h3>Порты и сокеты<span class="lvl">L4</span></h3>
+    <ul class="p">
+      <li><b class="t">Порт</b> — 16-битный номер (<span class="m">0–65535</span>), идентифицирующий прикладной процесс на узле. Именно порты позволяют транспортному уровню выполнять мультиплексирование: десятки приложений одного компьютера используют один IP-адрес.</li>
+      <li><b class="t">Диапазоны IANA:</b>
+        <ul>
+          <li><span class="m">0–1023</span> — общеизвестные (well-known), закреплены за стандартными службами; на UNIX требуют прав администратора;</li>
+          <li><span class="m">1024–49151</span> — зарегистрированные за конкретными приложениями;</li>
+          <li><span class="m">49152–65535</span> — динамические (эфемерные), ОС выдаёт их клиенту на время соединения.</li>
+        </ul>
+      </li>
+      <li><b class="t">Важно:</b> наборы портов TCP и UDP независимы — порт 53 TCP и порт 53 UDP принадлежат разным пространствам.</li>
+      <li><b class="t">Сокет (socket)</b> — пара «<span class="m">IP-адрес : номер порта</span>», например <span class="m">192.168.1.10:443</span>. Однозначно определяет конечную точку обмена в масштабе всей сети.</li>
+      <li><b class="t">Соединение</b> задаётся <i>четвёркой</i>: IP и порт источника + IP и порт получателя (с указанием протокола — пятёркой). Поэтому один серверный порт 443 обслуживает тысячи клиентов: соединения различаются адресом и портом клиента.</li>
+      <li><b class="t">Сокеты как программный интерфейс</b> (Berkeley sockets): сервер — <span class="m">socket() → bind() → listen() → accept()</span>; клиент — <span class="m">socket() → connect()</span>; далее <span class="m">send()/recv()</span> и <span class="m">close()</span>.</li>
+    </ul>
+    <div class="nums"><span><b>20/21</b> FTP</span><span><b>22</b> SSH</span><span><b>23</b> Telnet</span><span><b>25</b> SMTP</span><span><b>53</b> DNS</span><span><b>67/68</b> DHCP</span><span><b>80</b> HTTP</span><span><b>110</b> POP3</span><span><b>143</b> IMAP</span><span><b>161</b> SNMP</span><span><b>443</b> HTTPS</span></div>
+  </div>
+</article>
+
+<article class="q" id="q44">
+  <div class="q-num">44</div>
+  <div class="q-body">
+    <h3>Протокол TCP. Формат заголовка TCP-сегмента<span class="lvl">L4</span></h3>
+    <div class="scroll">
+      <div class="bits">
+        <div class="f k" style="grid-column:span 16">Порт источника · 16</div>
+        <div class="f k" style="grid-column:span 16">Порт назначения · 16</div>
+        <div class="f k" style="grid-column:span 32">Номер последовательности (SEQ) · 32</div>
+        <div class="f k" style="grid-column:span 32">Номер подтверждения (ACK) · 32</div>
+        <div class="f" style="grid-column:span 4">Длина</div>
+        <div class="f d" style="grid-column:span 6">резерв</div>
+        <div class="f k" style="grid-column:span 6">Флаги</div>
+        <div class="f k" style="grid-column:span 16">Размер окна · 16</div>
+        <div class="f" style="grid-column:span 16">Контрольная сумма · 16</div>
+        <div class="f" style="grid-column:span 16">Указатель срочности · 16</div>
+        <div class="f d" style="grid-column:span 32">Опции + выравнивание (0–40 байт)</div>
+      </div>
+      <div class="ruler"><span>бит 0</span><span>8</span><span>16</span><span>24</span></div>
+    </div>
+    <ul class="p" style="margin-top:10px">
+      <li><b class="t">Номер последовательности (SEQ)</b> — номер <i>первого байта</i> данных сегмента в общем потоке. В TCP нумеруются байты, а не сегменты. Начальный номер ISN выбирается случайно при установлении соединения.</li>
+      <li><b class="t">Номер подтверждения (ACK)</b> — номер байта, который сторона ожидает получить следующим. Квитирование <b>кумулятивное</b>: подтверждая байт N, сторона подтверждает и всё, что до него.</li>
+      <li><b class="t">Длина заголовка (Data Offset)</b> — в 32-битных словах, от 5 до 15, то есть от 20 до 60 байт.</li>
+      <li><b class="t">Флаги:</b> <span class="m">URG</span> — есть срочные данные; <span class="m">ACK</span> — поле подтверждения значимо; <span class="m">PSH</span> — передать данные приложению немедленно; <span class="m">RST</span> — аварийный сброс соединения; <span class="m">SYN</span> — запрос синхронизации номеров (установление); <span class="m">FIN</span> — завершение передачи. Дополнительно <span class="m">CWR</span> и <span class="m">ECE</span> для уведомления о перегрузке.</li>
+      <li><b class="t">Размер окна</b> — сколько байт отправитель этого сегмента готов принять без подтверждения. Основной механизм управления потоком; при больших скоростях расширяется опцией Window Scale.</li>
+      <li><b class="t">Контрольная сумма</b> обязательна и охватывает заголовок, данные и <i>псевдозаголовок</i> IP (адреса, протокол, длина) — это позволяет обнаружить доставку сегмента не по адресу.</li>
+      <li><b class="t">Опции:</b> <span class="m">MSS</span> (максимальный размер сегмента, обычно 1460 байт для Ethernet), Window Scale, SACK permitted (выборочное подтверждение), Timestamps.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q45">
+  <div class="q-num">45</div>
+  <div class="q-body">
+    <h3>Протокол TCP. Установка логического соединения<span class="lvl">L4</span></h3>
+    <p class="lead">TCP — дуплексный протокол с установлением соединения. Перед обменом данными выполняется <b>тройное рукопожатие</b> (three-way handshake). Его смысл: согласовать начальные номера последовательности в обоих направлениях, размеры окна и MSS и убедиться, что обе стороны готовы.</p>
+    <ul class="p">
+      <li><b class="t">Шаг 1.</b> Клиент → сервер: сегмент с флагом <span class="m">SYN = 1</span>, <span class="m">SEQ = x</span> (случайный ISN клиента) и опциями (MSS, Window Scale, SACK). Клиент переходит в состояние <span class="m">SYN-SENT</span>.</li>
+      <li><b class="t">Шаг 2.</b> Сервер → клиент: <span class="m">SYN = 1, ACK = 1</span>, <span class="m">SEQ = y</span> (свой ISN), номер подтверждения <span class="m">= x + 1</span>. Состояние <span class="m">SYN-RECEIVED</span>. Этот сегмент одновременно подтверждает запрос клиента и открывает встречное направление.</li>
+      <li><b class="t">Шаг 3.</b> Клиент → сервер: <span class="m">ACK = 1</span>, <span class="m">SEQ = x + 1</span>, номер подтверждения <span class="m">= y + 1</span>. Обе стороны в состоянии <span class="m">ESTABLISHED</span>, можно передавать данные (их разрешено вложить уже в третий сегмент).</li>
+      <li><b class="t">Роли сторон:</b> сервер выполняет <i>пассивное открытие</i> и заранее находится в состоянии <span class="m">LISTEN</span>; клиент выполняет <i>активное открытие</i>.</li>
+      <li><b class="t">Почему три, а не два сегмента:</b> нужно подтвердить начальный номер в каждом из двух направлений; при двух сегментах вторая сторона не узнает, дошёл ли её ISN.</li>
+      <li><b class="t">Разрыв — четырёхэтапный:</b> FIN и ACK в каждую сторону независимо, так как соединение дуплексное и одна сторона может закончить передачу раньше (полузакрытое состояние). Завершается состоянием <span class="m">TIME-WAIT</span> длительностью 2·MSL — чтобы «заблудившиеся» сегменты не попали в новое соединение. Аварийный обрыв — сегмент <span class="m">RST</span>.</li>
+      <li><b class="t">Уязвимость:</b> <b>SYN-flood</b> — поток SYN с поддельных адресов переполняет очередь полуоткрытых соединений. Защита — SYN cookies, ограничение скорости, уменьшение таймаутов.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q46">
+  <div class="q-num">46</div>
+  <div class="q-body">
+    <h3>Методы квитирования</h3>
+    <p class="lead">Квитанция (подтверждение, ACK) — служебное сообщение о приёме данных. Это основа надёжной передачи: если квитанция не пришла за время тайм-аута, отправитель повторяет передачу. Различаются методы тем, <i>сколько</i> данных разрешено передать до получения подтверждения.</p>
+    <ul class="p">
+      <li><b class="t">Простой метод (idle source, stop-and-wait).</b> Отправитель посылает один блок и <i>ждёт</i> квитанцию, и только потом шлёт следующий. Максимально прост, но канал простаивает всё время ожидания. Эффективность падает тем сильнее, чем больше произведение «скорость × задержка» — на спутниковом канале она катастрофическая.</li>
+      <li><b class="t">Метод скользящего окна (sliding window).</b> Отправителю разрешено передать до <b>W</b> единиц данных, не дожидаясь подтверждений. По мере прихода квитанций окно «скользит» вперёд, освобождая место для новых блоков. Канал загружается непрерывно.</li>
+      <li><b class="t">Выбор размера окна:</b> чтобы канал не простаивал, окно должно быть не меньше произведения пропускной способности на время кругового обхода — <span class="m">W ≥ BDP = C × RTT</span>. Слишком маленькое окно — простой канала; слишком большое — рост требований к буферам и объёма повторной передачи при потере.</li>
+      <li><b class="t">Стратегии повтора:</b> <i>Go-Back-N</i> — при потере повторяется весь «хвост» окна, начиная с потерянного блока (просто, но избыточно); <i>Selective Repeat</i> — повторяется только потерянное (в TCP это опция <span class="m">SACK</span>).</li>
+      <li><b class="t">Отрицательная квитанция (NAK)</b> — явное сообщение «блок не принят», позволяет не ждать тайм-аута.</li>
+      <li><b class="t">Реализация в TCP:</b> окно измеряется в байтах и динамически меняется; его размер — минимум из окна приёмника (управление потоком) и окна перегрузки (алгоритмы slow start, congestion avoidance, fast retransmit и fast recovery). Тайм-аут повторной передачи RTO вычисляется адаптивно по измеренным значениям RTT (алгоритм Джекобсона).</li>
+    </ul>
+  </div>
+</article>
+
+<div class="sec" id="s9"><h2>Сети операторов связи</h2><span class="range">47–50</span></div>
+
+<article class="q" id="q47">
+  <div class="q-num">47</div>
+  <div class="q-body">
+    <h3>Сети операторов связи. Услуги операторов</h3>
+    <p class="lead">Оператор связи (сервис-провайдер, carrier) — компания, которая на коммерческой основе предоставляет услуги связи на базе собственной или арендованной инфраструктуры. В отличие от корпоративной сети, сеть оператора создаётся не для собственных нужд, а для продажи услуг.</p>
+    <ul class="p">
+      <li><b class="t">Транспортные услуги (связь):</b> аренда выделенных каналов (E1/E3, SDH, длина волны, «тёмное волокно»), виртуальные частные сети (MPLS L2/L3 VPN, ранее Frame Relay и ATM), доступ в Интернет, транзит трафика и пиринг.</li>
+      <li><b class="t">Услуги доступа («последняя миля»):</b> xDSL, FTTx и PON, кабельный доступ DOCSIS, Ethernet-доступ, мобильный доступ 3G/4G/5G, спутниковый, фиксированный беспроводной.</li>
+      <li><b class="t">Телефонные услуги:</b> местная, междугородная и международная связь, VoIP/SIP, выделение номерной ёмкости, виртуальная АТС.</li>
+      <li><b class="t">Информационные услуги и услуги с добавленной стоимостью:</b> хостинг и colocation, облачные сервисы (IaaS, PaaS, SaaS), доставка контента CDN, IPTV и видео по запросу, защита от DDoS, межсетевое экранирование как сервис, резервное копирование, аутсорсинг управления сетью.</li>
+      <li><b class="t">SLA (Service Level Agreement)</b> — соглашение об уровне обслуживания, ключевой документ: гарантированная доступность (например, 99,9 % — это около 8,8 часа простоя в год), гарантированная полоса, предельные задержка, джиттер и потери пакетов, время реакции и время устранения аварии, штрафы за нарушение.</li>
+      <li><b class="t">Тарификация:</b> по выделенной полосе, по объёму переданных данных, по времени, «безлимитные» тарифы; параметры CIR (гарантированная скорость) и PIR (пиковая).</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q48">
+  <div class="q-num">48</div>
+  <div class="q-body">
+    <h3>Сети операторов связи. Потребители услуг</h3>
+    <ul class="p">
+      <li><b class="t">Массовые (частные) пользователи.</b> Огромное число абонентов, низкий доход с каждого, главные требования — цена и простота подключения. Трафик асимметричный (приём много больше передачи) и пульсирующий, гарантий обычно не требуется. Типичный набор — «три услуги в одном»: Интернет, телефон, телевидение.</li>
+      <li><b class="t">Корпоративные клиенты.</b> Нужны объединение территориально разнесённых офисов (VPN), надёжный доступ с резервированием, гарантированная полоса и SLA, статические публичные адреса, телефония, облачные сервисы. Готовы платить за качество и поддержку — основной источник дохода оператора.</li>
+      <li><b class="t">Другие операторы связи.</b> Покупают транзит трафика, обмениваются трафиком на равноправной основе (<b>пиринг</b>) в точках обмена трафиком (IX, например MSK-IX), арендуют каналы и «тёмное волокно», размещают оборудование. Виртуальные операторы (MVNO) работают полностью на чужой инфраструктуре.</li>
+      <li><b class="t">Государственные, бюджетные и силовые структуры.</b> Особые требования к защите информации, к отечественному оборудованию и к документированию; часто — выделенные сегменты.</li>
+      <li><b class="t">Контент-провайдеры и ЦОД.</b> Нуждаются в очень широких каналах, размещении узлов CDN ближе к абонентам и в прямых стыках с операторами доступа.</li>
+      <li><b class="t">Иерархия операторов:</b>
+        <ul>
+          <li><b>Tier 1</b> — глобальные магистральные операторы: достигают любой точки Интернета только через пиринг и ни за какой транзит не платят;</li>
+          <li><b>Tier 2</b> — крупные региональные и национальные: частично пирятся, частично покупают транзит;</li>
+          <li><b>Tier 3</b> — локальные операторы доступа: только покупают транзит у вышестоящих.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q49">
+  <div class="q-num">49</div>
+  <div class="q-body">
+    <h3>Сети операторов связи. Инфраструктура и территория покрытия</h3>
+    <ul class="p">
+      <li><b class="t">Трёхуровневая структура сети оператора:</b>
+        <ul>
+          <li><b>Сеть доступа</b> — «последняя миля» до абонента: DSLAM, станции OLT и абонентские ONT в сетях PON, базовые станции сотовой связи, узлы Ethernet-доступа, домовые коммутаторы;</li>
+          <li><b>Сеть агрегации (городская, metro)</b> — собирает трафик районов и узлов доступа, обычно кольцевая с резервированием;</li>
+          <li><b>Магистраль (ядро, backbone)</b> — высокоскоростные каналы между городами и странами: DWDM, каналы 100/400 Гбит/с, маршрутизация MPLS.</li>
+        </ul>
+      </li>
+      <li><b class="t">Ключевые элементы инфраструктуры:</b> волоконно-оптические кабели (подземные, воздушные, подводные) и кабельная канализация, оптические кроссы, системы DWDM/OTN, маршрутизаторы ядра и агрегации, точки присутствия (PoP), центры обработки данных, узлы обмена трафиком, а также системы поддержки: управление сетью (OSS), биллинг и обслуживание клиентов (BSS), центр мониторинга (NOC).</li>
+      <li><b class="t">Классификация по территории покрытия:</b>
+        <ul>
+          <li><b>местные (локальные)</b> — район, город;</li>
+          <li><b>региональные</b> — область, федеральный округ;</li>
+          <li><b>национальные</b> — страна целиком;</li>
+          <li><b>международные (глобальные)</b> — межконтинентальные магистрали и подводные кабели.</li>
+        </ul>
+      </li>
+      <li><b class="t">Зависимость услуг от покрытия:</b> чем шире территория, тем большую долю дохода дают транзит и оптовые услуги другим операторам и тем выше требования к магистрали; локальный же оператор живёт в основном на услугах доступа.</li>
+      <li><b class="t">Собственная и арендованная инфраструктура:</b> оператор может владеть кабелями и узлами либо перепродавать чужие ресурсы (реселлер, MVNO). От этого зависят себестоимость, возможность давать гарантии SLA и скорость устранения аварий.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q50">
+  <div class="q-num">50</div>
+  <div class="q-body">
+    <h3>Принципы работы виртуального канала</h3>
+    <p class="lead">Виртуальный канал — заранее проложенный через сеть с коммутацией пакетов путь, по которому следуют <b>все</b> пакеты одного потока. Сочетает предсказуемость коммутации каналов с эффективностью коммутации пакетов.</p>
+    <ul class="p">
+      <li><b class="t">Фаза 1 — установление.</b> По сети проходит служебный пакет «запрос вызова» с полным адресом назначения. Каждый коммутатор на пути выбирает выходной порт, выделяет свободную <i>метку</i> и создаёт запись в таблице: <span class="m">входной порт + входная метка → выходной порт + выходная метка</span>. Обратный пакет подтверждает установление.</li>
+      <li><b class="t">Фаза 2 — передача данных.</b> В заголовке каждого пакета передаётся только короткая метка, а не полный адрес: <span class="m">VPI/VCI</span> в ATM, <span class="m">DLCI</span> в Frame Relay, 20-битная метка в MPLS. Заголовок короче, а поиск в таблице — по точному короткому ключу, то есть быстрее, чем поиск наибольшего совпадающего префикса.</li>
+      <li><b class="t">Подмена меток (label swapping):</b> метка имеет <i>локальное</i> значение и на каждом узле заменяется на новую. Благодаря этому пространство меток невелико и не требует глобального согласования.</li>
+      <li><b class="t">Фаза 3 — разрыв</b> по инициативе одной из сторон; записи в таблицах удаляются, метки освобождаются.</li>
+      <li><b class="t">Типы:</b> <b>PVC</b> — постоянный виртуальный канал, настраивается администратором и существует всегда; <b>SVC</b> — коммутируемый, устанавливается по запросу сигнальным протоколом.</li>
+      <li><b class="t">Достоинства:</b> порядок пакетов сохраняется (все идут одним путём); задержка предсказуема, джиттер мал; можно резервировать ресурсы и давать гарантии QoS (CIR, дескрипторы трафика); коммутация быстрая и дешёвая.</li>
+      <li><b class="t">Недостатки:</b> задержка на установление перед передачей; при отказе узла канал рвётся и требует переустановления (в MPLS решается заранее подготовленными резервными путями, fast reroute); коммутаторы хранят состояние каждого канала, что ограничивает масштабируемость.</li>
+      <li><b class="t">Где применяется:</b> X.25, Frame Relay, ATM, MPLS (пути LSP) и построенные на нём L2/L3 VPN операторов связи.</li>
+    </ul>
+  </div>
+</article>
+
+<div class="sec" id="s10"><h2>Беспроводные локальные сети</h2><span class="range">51–53</span></div>
+
+<article class="q" id="q51">
+  <div class="q-num">51</div>
+  <div class="q-body">
+    <h3>Топологии беспроводных локальных сетей</h3>
+    <ul class="p">
+      <li><b class="t">IBSS (Independent Basic Service Set), режим ad hoc.</b> Станции связываются напрямую друг с другом, точки доступа нет, все узлы равноправны. Применяется для временных сетей «на коленке»; зона ограничена взаимной слышимостью станций, нет выхода в проводную сеть.</li>
+      <li><b class="t">BSS (Basic Service Set), инфраструктурный режим.</b> Есть <b>точка доступа</b> (AP), и весь трафик идёт через неё — даже между двумя станциями в одной комнате. Идентификатор соты <span class="m">BSSID</span> совпадает с MAC-адресом точки доступа; зона обслуживания называется BSA. Точка доступа выполняет роль моста в проводную сеть и управляет доступом.</li>
+      <li><b class="t">ESS (Extended Service Set).</b> Несколько BSS, объединённых распределительной системой (DS — обычно проводной Ethernet), работающих под одним именем <span class="m">SSID</span>. Именно ESS делает возможным <i>роуминг</i>: станция переходит от точки к точке, не теряя соединения.</li>
+      <li><b class="t">Ячеистая сеть (mesh, 802.11s):</b> точки доступа связаны по радио друг с другом и ретранслируют трафик соседей; сеть самоорганизуется и не требует кабеля к каждой точке.</li>
+      <li><b class="t">Беспроводной мост (WDS):</b> соединение сегментов «точка–точка» или «точка–многоточка» по радио, часто на направленных антеннах, вместо прокладки кабеля между зданиями.</li>
+      <li><b class="t">Понятия планирования:</b> <span class="m">SSID</span> — имя сети до 32 символов; каналы: в диапазоне 2,4 ГГц — 13 каналов с шагом 5 МГц, но полностью непересекающихся лишь три — <b>1, 6, 11</b>; в 5 ГГц каналов существенно больше (с требованием DFS — освобождения канала при обнаружении радара). Соседние соты должны перекрываться на 10–15 % площади, чтобы роуминг был бесшовным.</li>
+      <li><b class="t">Специфические проблемы радиосреды:</b> <i>скрытый узел</i> — две станции слышат точку доступа, но не слышат друг друга и потому создают коллизии (решается обменом RTS/CTS); <i>засвеченный узел</i> — станция напрасно откладывает передачу, считая среду занятой.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q52">
+  <div class="q-num">52</div>
+  <div class="q-body">
+    <h3>Стек протоколов IEEE 802.11</h3>
+    <p class="lead">Стандарт 802.11 описывает физический уровень и MAC-подуровень канального. Сверху лежит общий для всех сетей IEEE 802 подуровень <span class="m">LLC (802.2)</span> — именно благодаря ему Wi-Fi и Ethernet выглядят для IP одинаково.</p>
+    <ul class="p">
+      <li><b class="t">Физический уровень делится на два подуровня:</b> <span class="m">PLCP</span> — процедура конвергенции: принимает кадр от MAC, добавляет преамбулу и физический заголовок, формирует PPDU; <span class="m">PMD</span> — зависящая от среды часть: собственно модуляция, передача и приём радиосигнала.</li>
+      <li><b class="t">Эволюция физического уровня:</b>
+        <ul>
+          <li>802.11 (1997) — FHSS и DSSS, 1–2 Мбит/с;</li>
+          <li>802.11b — HR-DSSS, 11 Мбит/с, 2,4 ГГц;</li>
+          <li>802.11a — OFDM, 54 Мбит/с, 5 ГГц; 802.11g — тот же OFDM в 2,4 ГГц;</li>
+          <li>802.11n (Wi-Fi 4) — MIMO-OFDM, каналы 40 МГц, до 600 Мбит/с;</li>
+          <li>802.11ac (Wi-Fi 5) — только 5 ГГц, каналы до 160 МГц, MU-MIMO, до ~6,9 Гбит/с;</li>
+          <li>802.11ax (Wi-Fi 6/6E) — OFDMA, работа в 6 ГГц; 802.11be (Wi-Fi 7).</li>
+        </ul>
+      </li>
+      <li><b class="t">MAC-подуровень. Метод доступа — CSMA/CA</b> (с предотвращением коллизий): обнаружить коллизию в радиоканале нельзя (передатчик глушит собственный приёмник), поэтому их <i>избегают</i>. Станция слушает эфир, выжидает межкадровый интервал, затем случайную отсрочку (backoff), передаёт и <b>ждёт подтверждения ACK</b> — отсутствие ACK трактуется как коллизия.</li>
+      <li><b class="t">Межкадровые интервалы</b> задают приоритет доступа: <span class="m">SIFS &lt; PIFS &lt; DIFS &lt; EIFS</span>. Самый короткий SIFS отдан подтверждениям и ответам CTS, поэтому они всегда опережают новые передачи.</li>
+      <li><b class="t">Виртуальный контроль несущей:</b> обмен <span class="m">RTS/CTS</span> резервирует эфир, а поле длительности задаёт всем соседям вектор распределения сети <span class="m">NAV</span> — таймер, в течение которого они молчат. Это и решает проблему скрытого узла.</li>
+      <li><b class="t">Функции координации:</b> <b>DCF</b> — распределённая, обязательная, состязательный доступ; <b>PCF</b> — централизованная, точка доступа опрашивает станции по списку (почти не применяется); <b>HCF/EDCA</b> (802.11e) — доступ с категориями QoS (голос, видео, обычный трафик, фон).</li>
+      <li><b class="t">Прочие функции MAC:</b> фрагментация кадров, шифрование (WEP → WPA/TKIP → WPA2/CCMP-AES → WPA3/SAE), энергосбережение (буферизация кадров точкой доступа, оповещения TIM/DTIM), аутентификация и ассоциация, роуминг.</li>
+      <li><b class="t">Три типа кадров:</b> управляющие (Beacon, Probe, Authentication, Association), контрольные (RTS, CTS, ACK) и кадры данных. В заголовке кадра — до <b>четырёх</b> MAC-адресов (источник, получатель, передающая и принимающая станции), что нужно для работы через распределительную систему.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="q" id="q53">
+  <div class="q-num">53</div>
+  <div class="q-body">
+    <h3>Процедура присоединения к сети в технологии Wi-Fi</h3>
+    <p class="lead">Присоединение состоит из трёх обязательных этапов — <b>сканирование → аутентификация → ассоциация</b>, после которых идут согласование ключей и получение IP-адреса.</p>
+    <ul class="p">
+      <li><b class="t">Этап 1. Сканирование (обнаружение сети).</b>
+        <ul>
+          <li><i>пассивное</i> — станция последовательно слушает каналы и ловит служебные кадры <b>Beacon</b>, которые точка доступа рассылает примерно каждые 100 мс; в них передаются SSID, BSSID, поддерживаемые скорости, параметры защиты, карта TIM;</li>
+          <li><i>активное</i> — станция сама рассылает <b>Probe Request</b> (с конкретным SSID или широковещательный), и точки доступа отвечают <b>Probe Response</b>. Быстрее, но демаскирует станцию.</li>
+        </ul>
+        Из найденных точек выбирается лучшая — обычно по уровню сигнала и поддерживаемым возможностям.
+      </li>
+      <li><b class="t">Этап 2. Аутентификация.</b> Обмен кадрами <b>Authentication Request / Response</b>. Исходные механизмы 802.11: <i>Open System</i> — формальная аутентификация, завершается успехом всегда; <i>Shared Key</i> — схема «вызов–ответ» на ключе WEP, признана небезопасной. В современных сетях: WPA2/WPA3-Personal используют Open System с последующим доказательством знания пароля, WPA3 — протокол SAE; в корпоративных сетях — <span class="m">802.1X/EAP</span> с проверкой учётных данных на сервере RADIUS.</li>
+      <li><b class="t">Этап 3. Ассоциация.</b> Станция шлёт <b>Association Request</b> (SSID, поддерживаемые скорости и возможности), точка доступа отвечает <b>Association Response</b> с кодом состояния и идентификатором <span class="m">AID</span>. Станция заносится в таблицу точки доступа, и та начинает выполнять для неё роль моста в распределительную систему. Станция может быть ассоциирована <i>только с одной</i> точкой доступа одновременно.</li>
+      <li><b class="t">Этап 4. Согласование ключей.</b> Четырёхэтапное рукопожатие (4-way handshake): из общего парного мастер-ключа PMK вырабатываются сеансовый ключ PTK и групповой GTK; после этого трафик шифруется.</li>
+      <li><b class="t">Этап 5.</b> Обычное получение сетевых параметров по <b>DHCP</b> — и станция работает.</li>
+      <li><b class="t">Роуминг:</b> при переходе к другой точке того же ESS выполняется <b>реассоциация</b> (Reassociation Request), при которой новая точка запрашивает контекст станции у старой. Ускоряют переход стандарты <span class="m">802.11r</span> (быстрый переход между BSS), <span class="m">802.11k</span> (отчёты о соседях) и <span class="m">802.11v</span> (управление станцией со стороны сети).</li>
+      <li><b class="t">Отключение:</b> кадры <b>Disassociation</b> и <b>Deauthentication</b>. В классическом 802.11 они не защищены, чем пользуется атака деаутентификации; защита — механизм защищённых управляющих кадров (802.11w), обязательный в WPA3.</li>
+    </ul>
+  </div>
+</article>
+
+</main>
+</div>
+
+<footer>
+  53 вопроса по курсу «Компьютерные сети». Термины и стандарты — по Олиферам, IEEE 802 и документам RFC.
+  Поиск ищет по тексту ответов; можно ввести номер вопроса. Клавиша <b>/</b> — перейти к поиску.
+</footer>
+
+<script>
+(function(){
+  var qs = Array.prototype.slice.call(document.querySelectorAll('.q'));
+  var secs = Array.prototype.slice.call(document.querySelectorAll('.sec'));
+  var input = document.getElementById('f');
+  var cnt = document.getElementById('cnt');
+  var grid = document.querySelector('#idx .grid');
+
+  // указатель по номерам строится из самих вопросов
+  var chips = qs.map(function(q){
+    var n = q.querySelector('.q-num').textContent.trim();
+    var t = q.querySelector('h3').textContent.trim();
+    var a = document.createElement('a');
+    a.href = '#' + q.id;
+    a.textContent = String(parseInt(n, 10));
+    a.title = n + '. ' + t;
+    grid.appendChild(a);
+    q._chip = a;
+    q._text = (n + ' ' + t + ' ' + q.textContent).toLowerCase().replace(/ё/g, 'е');
+    return a;
+  });
+
+  function apply(){
+    var raw = input.value.trim().toLowerCase().replace(/ё/g, 'е');
+    var byNum = /^\d{1,2}$/.test(raw) ? parseInt(raw, 10) : null;
+    var shown = 0;
+
+    qs.forEach(function(q){
+      var num = parseInt(q.querySelector('.q-num').textContent, 10);
+      var hit;
+      if (!raw) hit = true;
+      else if (byNum !== null) hit = (num === byNum) || q._text.indexOf(raw) > -1;
+      else hit = q._text.indexOf(raw) > -1;
+
+      q.classList.toggle('hidden', !hit);
+      q._chip.classList.toggle('off', !hit);
+      q._chip.classList.toggle('on', !!raw && hit);
+      if (hit) shown++;
+    });
+
+    // заголовок раздела виден, только если в нём остался хоть один вопрос
+    secs.forEach(function(s){
+      var any = false, el = s.nextElementSibling;
+      while (el && !el.classList.contains('sec')) {
+        if (el.classList.contains('q') && !el.classList.contains('hidden')) { any = true; break; }
+        el = el.nextElementSibling;
+      }
+      s.classList.toggle('hidden', !any);
+    });
+
+    cnt.innerHTML = raw ? (shown + ' / 53') : '53 / 53';
+    cnt.style.color = (raw && shown === 0) ? 'var(--flag)' : '';
+  }
+
+  input.addEventListener('input', apply);
+  input.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { input.value = ''; apply(); input.blur(); }
+    if (e.key === 'Enter') {
+      var first = qs.filter(function(q){ return !q.classList.contains('hidden'); })[0];
+      if (first) { location.hash = '#' + first.id; input.blur(); }
+    }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === '/' && document.activeElement !== input) { e.preventDefault(); input.focus(); input.select(); }
+  });
+
+  apply();
+})();
+</script>
+
+</body>
+</html>
